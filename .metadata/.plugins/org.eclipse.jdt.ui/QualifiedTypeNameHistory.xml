@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
+<fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="javax.persistence.CollectionTable"/>
+<fullyQualifiedTypeName name="javax.persistence.ElementCollection"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="javax.persistence.FetchType"/>
+<fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+<fullyQualifiedTypeName name="org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.dto.CredenciasDTO"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.grupos.Perfil"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.repository.PetclientRepository"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.entity.Petclient"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.security.UserSS"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.security.JWTUtil"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.security.JWTAuthenticationFilter"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.repository.PetVetRepository"/>
+<fullyQualifiedTypeName name="com.mypet.myPetApp.entity.PetVet"/>
+</qualifiedTypeNameHistroy>
