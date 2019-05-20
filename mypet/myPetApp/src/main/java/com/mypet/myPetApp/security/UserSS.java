@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.mypet.myPetApp.grupos.Perfil;
+import com.mypet.myPetApp.grupos.Role;
 
 
 
@@ -26,12 +26,13 @@ public class UserSS implements UserDetails {
 
 
 
-	public UserSS(Integer id, String email, String password, Set<Perfil> perfis) {
+	public UserSS(Integer id, String email, String password, Set<Role> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.authorrities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+		System.out.println("Logado com sucesso !");
 	}
 
 

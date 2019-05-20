@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mypet.myPetApp.grupos.Perfil;
+import com.mypet.myPetApp.grupos.Role;
 import com.mypet.myPetApp.grupos.TipoGrupo;
 
 
@@ -57,8 +57,8 @@ public class Petclient implements Serializable {
 	private Set<String> telefones = new HashSet<>();//permite não repetir valores(represanta os conjuntos de valores )
 	
     @ElementCollection(fetch = FetchType.EAGER)//traz o perfil junto
-	@CollectionTable(name="PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
+	@CollectionTable(name="ROLES_CLIENTE")
+	private Set<Integer> roles = new HashSet<>();
     
   
 
@@ -66,7 +66,7 @@ public class Petclient implements Serializable {
 
 	public Petclient (){
 
-			addPerfil(Perfil.CLIENTE);
+			addPerfil(Role.CLIENTE);
 		
     }
 
@@ -83,7 +83,7 @@ public class Petclient implements Serializable {
 		this.dataNascimento = dataNascimento;
 		this.avaliacao = avaliacao;
 		this.cpf = cpf;
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Role.CLIENTE);
 	}
 
 
@@ -216,27 +216,13 @@ public class Petclient implements Serializable {
 	}
 
 
-	public  Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
+	public  Set<Role> getRole(){
+		return roles.stream().map(x -> Role.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
 	}
 
-	public void addPerfil (Perfil perfil) {
-		perfis.add(perfil.getCod());
+	public void addPerfil (Role perfil) {
+		roles.add(perfil.getCod());
 	}
-
-
-	/**
-     * @return the endereco
-     */
-  //  public Set<Endereco> getEndereco() {
-    //    return enderecos;
-  //  }
-    /**
-     * @param endereco the endereco to set
-     */
-   // public void setEndereco(Set<Endereco> enderecos) {
-      //  this.enderecos = enderecos;
-   // }
 
 	
 	

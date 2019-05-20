@@ -55,7 +55,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			CredenciasDTO creds = new ObjectMapper().readValue(req.getInputStream(), CredenciasDTO.class); // pega os dados das credencias que veio na  requisição, e converte para tipo que estiver na class
 
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(),
-					creds.getSenha(), new ArrayList<>()); // pegando os dados instancia ele com esse tipo
+					creds.getPassword(), new ArrayList<>()); // pegando os dados instancia ele com esse tipo
 
 			Authentication auth = authenticationManager.authenticate(authToken); // quando instanciado chama esse metado, verifica se usurio é valido ou não atraves do UserDetails
 

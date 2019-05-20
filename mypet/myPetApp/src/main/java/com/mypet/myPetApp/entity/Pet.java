@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.mypet.myPetApp.entity.Petclient;
-import com.mypet.myPetApp.grupos.Perfil;
+import com.mypet.myPetApp.grupos.Role;
 
 @Entity
 public class Pet implements Serializable {

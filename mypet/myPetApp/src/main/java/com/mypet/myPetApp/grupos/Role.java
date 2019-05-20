@@ -1,6 +1,6 @@
 package com.mypet.myPetApp.grupos;
 
-public enum Perfil {
+public enum Role {
 
 
 	ADMIN(1, "ROLE_ADMIN"), //ROLE É EXIGENCIA DO SPRING
@@ -13,7 +13,7 @@ public enum Perfil {
 	private String descricao;
 
 
-	private Perfil(Integer cod,String descricao) {
+	private Role(Integer cod,String descricao) {
 
 		this.cod = cod;
 		this.descricao = descricao;
@@ -29,13 +29,13 @@ public enum Perfil {
 	}
 
 
-	public static Perfil toEnum(Integer cod) { //static porque essa operação precisa ser executada mesmo sem instaciar objetos
+	public static Role toEnum(Integer cod) { //static porque essa operação precisa ser executada mesmo sem instaciar objetos
 
 		if(cod == null) {
 			return null;
 		}
 
-		for(Perfil x : Perfil.values()) { //percorre todos os valores possiveis do tipoEnumerado
+		for(Role x : Role.values()) { //percorre todos os valores possiveis do tipoEnumerado
 		   if(cod.equals(x.getCod())) {//varrendo todas as possibilidades
 			 return x;
 		   }

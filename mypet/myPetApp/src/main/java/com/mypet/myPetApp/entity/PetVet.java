@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mypet.myPetApp.grupos.Perfil;
+import com.mypet.myPetApp.grupos.Role;
 import com.mypet.myPetApp.grupos.TipoGrupo;
 
 @Entity
@@ -46,11 +46,11 @@ public class PetVet implements Serializable {
 	private Set<String> telefones = new HashSet<>();// permite não repetir valores(represanta os conjuntos de valores )
 	
 	@ElementCollection(fetch = FetchType.EAGER)//traz o perfil junto
-   	@CollectionTable(name="PERFIS_PETVET")
-   	private Set<Integer> perfis = new HashSet<>();
+   	@CollectionTable(name="ROLES_VET")
+   	private Set<Integer> roles = new HashSet<>();
 
 	public PetVet() {
-		addPerfil(Perfil.SERVICOS);
+		addPerfil(Role.SERVICOS);
 	}
 
 	public PetVet(Integer id, String nomeRazaoSocial, String cnpj, TipoGrupo tipoPerfil, String email, String password,
@@ -67,7 +67,7 @@ public class PetVet implements Serializable {
 		this.numero = numero;
 		this.bairro = bairro;
 		this.cep = cep;
-		addPerfil(Perfil.SERVICOS);
+		addPerfil(Role.SERVICOS);
 		
 
 	}
@@ -106,8 +106,8 @@ public class PetVet implements Serializable {
 	}
 
 	/**
-	 * @param id              the id to set
-	 * 
+	 * @param             the id to set
+	 *
 	 *                        /**
 	 * @param nomeRazaoSocial the nomeRazaoSocial to set
 	 */
@@ -187,12 +187,12 @@ public class PetVet implements Serializable {
 		this.cep = cep;
 	}
 
-	public  Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
+	public  Set<Role> getPerfis(){
+		return roles.stream().map(x -> Role.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
 	}
 
-	public void addPerfil (Perfil perfil) {
-		perfis.add(perfil.getCod());
+	public void addPerfil (Role perfil) {
+		roles.add(perfil.getCod());
 	}
 
 }

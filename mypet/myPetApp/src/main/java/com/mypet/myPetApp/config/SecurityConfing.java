@@ -20,7 +20,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.mypet.myPetApp.security.JWTAuthenticationFilter;
 import com.mypet.myPetApp.security.JWTUtil;
-import com.mypet.myPetApp.service.UserDetailsServiceImplPET;
 
 @Configuration
 @EnableWebSecurity
@@ -30,10 +29,9 @@ public class SecurityConfing extends WebSecurityConfigurerAdapter {
 	private Environment env; // para funcionar o H2
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	@Autowired
-	private UserDetailsServiceImplPET userDetailsServiceImplPET;
-	
+
+
+
 	
 
 	@Autowired
