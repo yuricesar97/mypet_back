@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.yuri.mypet.domain.EnderecoJuridico;
 import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.domain.enums.TipoCliente;
 import com.yuri.mypet.dto.PessoaJuridicaDTO;
@@ -47,7 +46,7 @@ public class PessoaJuridicaService {
 	public PessoaJuridica insert(PessoaJuridica obj) {
 		obj.setId(null);
 		obj = repo.save(obj); // salva cliente
-		enderecoRepository.saveAll(obj.getEnderecos()); // salva endereço
+	//	enderecoRepository.saveAll(obj.getEnderecos()); // salva endereço
 		return obj;
 	}
 
@@ -71,6 +70,8 @@ public class PessoaJuridicaService {
 	public List<PessoaJuridica> findAll() {
 		return repo.findAll();
 	}
+	
+
 
 	public Page<PessoaJuridica> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page vai
 																											// encapsular
@@ -100,17 +101,18 @@ public class PessoaJuridicaService {
 	public PessoaJuridica fromDto(PessoaJuridicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 
 		
-		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), null, null, null, false, false, false, false, false, false, false, false, false, false, false,false,false,false,false);
+		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), null, null, null,null,null,null,null, false, false, false, false, false, false, false, false, false, false, false,false,false,false,false,null,null,null,null,null,null,null);
 	}
 
 	public PessoaJuridica fromDto(PessoaJuridicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 			
-	//	PessoaJuridica cli1 = new PessoaJuridica PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop)
-		PessoaJuridica cli1 = new PessoaJuridica(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.isFarmacia(),
-				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop());
+	//	PessoaJuridica cli1 = new PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, descricaoPetShop, descricaoPetVet, descricaoPetHome, descricaoPetClient, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop, logradouro, numero, complemento, bairro, cep, cidade, estado)
+		PessoaJuridica cli1 = new PessoaJuridica(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetClient(),objDto.getDescricaoPetHome(),objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),objDto.isFarmacia(),
+				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop(),objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep()
+				              ,objDto.getCidade(),objDto.getEstado());
 	
-		EnderecoJuridico end = new EnderecoJuridico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
-		cli1.getEnderecos().add(end); // cliente conhece seus endereços
+	//	EnderecoJuridico end = new EnderecoJuridico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
+	//	cli1.getEnderecos().add(end); // cliente conhece seus endereços
 		cli1.getTelefones().add(objDto.getTelefone1());
 		if(objDto.getTelefone2() != null) {
 			cli1.getTelefones().add(objDto.getTelefone2());

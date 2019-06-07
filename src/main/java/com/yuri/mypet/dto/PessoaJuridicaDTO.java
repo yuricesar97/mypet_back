@@ -27,6 +27,12 @@ public class PessoaJuridicaDTO implements Serializable {
 	private String email;
 	private String cnpj;
 	
+	
+	private String descricaoPetShop;
+	private String descricaoPetVet;
+	private String descricaoPetHome;
+	private String descricaoPetClient;
+	
 	private boolean farmacia = false;
 	private boolean banho = false;
 	private boolean tosa = false;
@@ -134,6 +140,42 @@ public class PessoaJuridicaDTO implements Serializable {
 	}
 
 
+	
+
+	public String getDescricaoPetShop() {
+		return descricaoPetShop;
+	}
+
+	public void setDescricaoPetShop(String descricaoPetShop) {
+		this.descricaoPetShop = descricaoPetShop;
+	}
+
+
+	public String getDescricaoPetVet() {
+		return descricaoPetVet;
+	}
+
+	public void setDescricaoPetVet(String descricaoPetVet) {
+		this.descricaoPetVet = descricaoPetVet;
+	}
+
+	public String getDescricaoPetHome() {
+		return descricaoPetHome;
+	}
+
+
+	public void setDescricaoPetHome(String descricaoPetHome) {
+		this.descricaoPetHome = descricaoPetHome;
+	}
+
+	public String getDescricaoPetClient() {
+		return descricaoPetClient;
+	}
+
+
+	public void setDescricaoPetClient(String descricaoPetClient) {
+		this.descricaoPetClient = descricaoPetClient;
+	}
 
 
 	public boolean isFarmacia() {

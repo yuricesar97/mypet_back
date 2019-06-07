@@ -1,6 +1,5 @@
 package com.yuri.mypet.service;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.yuri.mypet.domain.Categoria;
-import com.yuri.mypet.domain.EnderecoFisico;
-import com.yuri.mypet.domain.EnderecoJuridico;
-import com.yuri.mypet.domain.ItemPedido;
-import com.yuri.mypet.domain.Pagamento;
-import com.yuri.mypet.domain.PagamentoComBoleto;
-import com.yuri.mypet.domain.PagamentoComCartao;
-import com.yuri.mypet.domain.Pedido;
 import com.yuri.mypet.domain.PessoaFisica;
 import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.domain.Produto;
-import com.yuri.mypet.domain.enums.EstadoPagamento;
 import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
 import com.yuri.mypet.repositories.CategoriasRepository;
@@ -115,29 +106,31 @@ public class DBService {
 			produtoRepository.saveAll(Arrays.asList(produto1,produto2,produto3,produto4,produto5,produto6,produto7,produto8,produto9,produto10,produto11));
 		
 		
-			PessoaFisica cli1 = new PessoaFisica (null, "Maria Silva", "yuricesar97@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoderEncoder.encode("123"),null,null,false,"21/04/1997");
+			PessoaFisica cli1 = new PessoaFisica (null, "Maria Silva", "yuricesar97@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoderEncoder.encode("123"),null,null,false,"21/04/1997","Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras",null);
 		   cli1.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 		   
 		  
 		   
-		   PessoaFisica cli2 = new PessoaFisica (null, "Ana Costa", "yur4544@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoderEncoder.encode("321"),null,null,false,null);
+		   PessoaFisica cli2 = new PessoaFisica (null, "Ana Costa", "yur4544@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoderEncoder.encode("321"),null,null,false,null,"Avenida Matos", "105", "Sala 800", "Centro", "38777012",  "Ponte",null);
 	       cli2.addPerfil(Perfil.ADMIN);
 	       cli2.getTelefones().addAll(Arrays.asList("23363323", "938388893"));
 	       
-	       EnderecoFisico e1 = new EnderecoFisico(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras",null, cli1 );
-	       EnderecoFisico e2 = new EnderecoFisico(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012",  "Ponte",null,cli1);
-	       EnderecoFisico e3 = new EnderecoFisico(null, "Avenida Floriano", "206", null, "Campinas", "38777012", "Campinas", null,cli2);
+	  //     EnderecoFisico e1 = new EnderecoFisico(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras",null, cli1 );
+	  //     EnderecoFisico e2 = new EnderecoFisico(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012",  "Ponte",null,cli1);
+	   //    EnderecoFisico e3 = new EnderecoFisico(null, "Avenida Floriano", "206", null, "Campinas", "38777012", "Campinas", null,cli2);
 		  
-	       cli1.getEndereço().addAll(Arrays.asList(e1,e2)); //cliente conhecendo seu endereços       
-	       cli2.getEndereço().addAll(Arrays.asList(e3));
+	    //   cli1.getEndereço().addAll(Arrays.asList(e1,e2)); //cliente conhecendo seu endereços       
+	   //   cli2.getEndereço().addAll(Arrays.asList(e3));
 	       
 		   clienteRepositoty.saveAll(Arrays.asList(cli1,cli2));
-		   enderecoRepositoty.saveAll(Arrays.asList(e1,e2,e3));
+	//	   enderecoRepositoty.saveAll(Arrays.asList(e1,e2,e3));
 	       
-		   PessoaJuridica ju = new PessoaJuridica(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, false, false, false, false, false, true, true, false, false, true, false,false,false,false,false);  
-		   EnderecoJuridico end1 = new EnderecoJuridico(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras",null, ju );
+		   PessoaJuridica ju = new PessoaJuridica(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, null,null,null,null,false, false, false, false, false, true, true, false, false, true, false,false,false,false,false,"Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras", null);  
+		  // EnderecoJuridico end1 = new EnderecoJuridico(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", "Arraras",null, ju );
 		   
 		   pessoaJuridicaRepository.saveAll(Arrays.asList(ju));
+	   /**
+		   
 		   enderecoJuridicoRepository.saveAll(Arrays.asList(end1));
 		   
 		   
@@ -145,6 +138,7 @@ public class DBService {
 		   
 		   Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32 "), cli1, e1);
 		   Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35 "), cli1, e2);
+		   /
 		   
 		   Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		   ped1.setPagamento(pgto1);
@@ -172,7 +166,7 @@ public class DBService {
 		     produto3.getItens().addAll(Arrays.asList(ip2));
 		     
 		     itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
-		
+		*/
 }
 
 

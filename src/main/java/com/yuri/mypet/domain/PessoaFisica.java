@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -41,14 +40,23 @@ public class PessoaFisica implements Serializable {
 	@JsonIgnore// para não aparecer no json
 	private String senha;
 	
+	private String logradouro;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cep;
+	private String cidade;
+	private String estado;
+	
 	private String fotoPerfil;
 	private boolean petWalker = false;
 	private String descricao;
 	private String dataNascimento;
 	
+	/**
 	@OneToMany(mappedBy = "pessoaFisica",cascade = CascadeType.ALL) // cascade, toda modificação que ocorrer no cliente ocorre em endereço com efeito cascata (quando apgar um cliente apaga um endereço tb)
 	private List<EnderecoFisico> enderecos = new ArrayList<>();
-	
+	*/
 	@JsonIgnore // pedidos do clinete não sera serealizados.
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>(); 
@@ -64,10 +72,11 @@ public class PessoaFisica implements Serializable {
 	
 	
 	public PessoaFisica(){
-		addPerfil(Perfil.CLIENTE); // ja colocar que é um cliente
+		addPerfil(Perfil.ADMIN); // ja colocar que é um cliente
 	}
 
-	public PessoaFisica(Integer id, String nomeCompleto,String email, String cpf, TipoCliente tipoPerfil,String senha,String fotoPerfil,String descricao,boolean petWalker,String dataNascimento) {
+	public PessoaFisica(Integer id, String nomeCompleto,String email, String cpf, TipoCliente tipoPerfil,String senha,String fotoPerfil,String descricao,boolean petWalker,String dataNascimento
+			,String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
@@ -75,11 +84,18 @@ public class PessoaFisica implements Serializable {
 		this.cpf = cpf;
 		this.tipoPerfil = (tipoPerfil==null) ? null : tipoPerfil.getCod(); //operador ternario ..  na intaciação não aceita nullo precisa de uma condicional por conta do getCod
 		this.senha = senha;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.fotoPerfil = fotoPerfil;
 		this.petWalker = petWalker;
 		this.descricao = descricao;
 		this.dataNascimento = dataNascimento;
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.ADMIN);
 	}
 
 	public Integer getId() {
@@ -104,6 +120,65 @@ public class PessoaFisica implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
+	
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
 
 	public void setSenha(String senha) {
 		this.senha = senha;
@@ -136,14 +211,7 @@ public class PessoaFisica implements Serializable {
 		this.tipoPerfil = tipoPerfil.getCod();
 	}
 
-	public List<EnderecoFisico> getEndereço() {
-		return enderecos;
-	}
-
-	public void setEndereço(List<EnderecoFisico> endereco) {
-		this.enderecos = endereco;
-	}
-
+	
 	public Set<String> getTelefones() {
 		return telefones;
 	}

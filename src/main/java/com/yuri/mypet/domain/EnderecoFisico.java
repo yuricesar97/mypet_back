@@ -8,11 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class EnderecoFisico implements Serializable {
@@ -29,12 +25,12 @@ public class EnderecoFisico implements Serializable {
 	private String cep;
 	private String cidade;
 	private String estado;
-	
+	/**
 	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")	
 	private PessoaFisica pessoaFisica;
-	
+	*/
 	@OneToMany(mappedBy = "enderecoDeEntrega")
 	private List<Pedido> enderecoDeEntrega = new ArrayList<Pedido>();
 	
@@ -42,8 +38,8 @@ public class EnderecoFisico implements Serializable {
 		
 	}
 
-	public EnderecoFisico (Integer id, String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado,
-			PessoaFisica pessoaFisica) {
+	public EnderecoFisico (Integer id, String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado
+			) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -51,7 +47,7 @@ public class EnderecoFisico implements Serializable {
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
-		this.pessoaFisica = pessoaFisica;
+		//this.pessoaFisica = pessoaFisica;
 		this.cidade = cidade;
 		this.estado = estado;
 	}
@@ -104,13 +100,7 @@ public class EnderecoFisico implements Serializable {
 		this.cep = cep;
 	}
 
-	public PessoaFisica getPessoaFisica() {
-		return pessoaFisica;
-	}
-
-	public void setPessoaFisica(PessoaFisica pessoaFisica) {
-		this.pessoaFisica = pessoaFisica;
-	}
+	
 	public String getCidade() {
 		return cidade;
 	}

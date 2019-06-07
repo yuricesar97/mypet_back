@@ -42,9 +42,18 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	@NotEmpty(message = "Preechimento obrigatório")
 	private String numero;
 	private String complemento;
+	
+	@NotEmpty(message = "Preechimento obrigatório")
+	private String cep;
+	
 	private String bairro;
 	private String cidade;
 	private String estado;
+	
+	private String descricaoPetShop;
+	private String descricaoPetVet;
+	private String descricaoPetHome;
+	private String descricaoPetClient;
 	
 	private boolean petVet = false;
 	private boolean petClient = false;
@@ -56,6 +65,7 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	private boolean tosa = false;
 	private boolean loja = false;
 	
+	
 	private boolean vacinacao = false;
 	private boolean consulta = false;
 	private boolean exames = false;
@@ -65,8 +75,7 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	private boolean fumante = false;
 	private boolean telado = false;
 	
-	@NotEmpty(message = "Preechimento obrigatório")
-	private String cep;
+	
 	
 	@NotEmpty(message = "Preechimento obrigatório")
 	private String telefone1;
@@ -210,7 +219,41 @@ public class PessoaJuridicaNewDTO implements Serializable {
 		this.senha = senha;
 	}
 
+	
+	
 
+
+	public String getDescricaoPetShop() {
+		return descricaoPetShop;
+	}
+
+	public void setDescricaoPetShop(String descricaoPetShop) {
+		this.descricaoPetShop = descricaoPetShop;
+	}
+
+	public String getDescricaoPetVet() {
+		return descricaoPetVet;
+	}
+
+	public void setDescricaoPetVet(String descricaoPetVet) {
+		this.descricaoPetVet = descricaoPetVet;
+	}
+
+	public String getDescricaoPetHome() {
+		return descricaoPetHome;
+	}
+
+	public void setDescricaoPetHome(String descricaoPetHome) {
+		this.descricaoPetHome = descricaoPetHome;
+	}
+
+	public String getDescricaoPetClient() {
+		return descricaoPetClient;
+	}
+
+	public void setDescricaoPetClient(String descricaoPetClient) {
+		this.descricaoPetClient = descricaoPetClient;
+	}
 
 	public String getCidade() {
 		return cidade;

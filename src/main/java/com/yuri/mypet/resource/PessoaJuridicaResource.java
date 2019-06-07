@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.yuri.mypet.domain.EnderecoJuridico;
 import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.dto.PessoaJuridicaDTO;
 import com.yuri.mypet.dto.PessoaJuridicaNewDTO;
@@ -35,6 +36,11 @@ public class PessoaJuridicaResource {
 		PessoaJuridica obj = service.find(id);
 		return ResponseEntity.ok().body(obj) ;
 	}
+	
+
+	
+	
+	
 		
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaJuridicaNewDTO objDto) { // requestBody faz o json ser convertido para obj// java automaticamente

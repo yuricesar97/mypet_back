@@ -1,13 +1,10 @@
 package com.yuri.mypet.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -16,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yuri.mypet.domain.enums.Perfil;
@@ -41,7 +37,20 @@ public class PessoaJuridica implements Serializable {
 	@JsonIgnore// para não aparecer no json
 	private String senha;
 	
+	private String logradouro;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cep;
+	private String cidade;
+	private String estado;
+	
 	private String fotoPerfil;
+	private String descricaoPetShop;
+	private String descricaoPetVet;
+	private String descricaoPetHome;
+	private String descricaoPetClient;
+
 	
 	private boolean petVet = false;
 	private boolean petClient = false;
@@ -62,9 +71,10 @@ public class PessoaJuridica implements Serializable {
 	private boolean fumante = false;
 	private boolean telado = false;
 	
+	/**
 	@OneToMany(mappedBy = "pessoaJuridica",cascade = CascadeType.ALL) // cascade, toda modificação que ocorrer no cliente ocorre em endereço com efeito cascata (quando apgar um cliente apaga um endereço tb)
 	private List<EnderecoJuridico> enderecos = new ArrayList<>();
-	
+	*/
 	@JsonIgnore // pedidos do clinete não sera serealizados.
 	
 	
@@ -87,9 +97,10 @@ public class PessoaJuridica implements Serializable {
 	
 
 	public PessoaJuridica(Integer id, String razaoSocial, String email, String cnpj, TipoCliente tipoPerfil, String senha,
-			String fotoPerfil, boolean farmacia, boolean banho,
+			String fotoPerfil, String descricaoPetShop, String descricaoPetVet,String descricaoPetHome,String descricaoPetClient, boolean farmacia, boolean banho,
 			boolean tosa, boolean loja, boolean vacinacao, boolean consulta, boolean exames, boolean apartamento,
-			boolean casa, boolean fumante, boolean telado, boolean petVet,boolean petClient,boolean petHome,boolean petShop) {
+			boolean casa, boolean fumante, boolean telado, boolean petVet,boolean petClient,boolean petHome,boolean petShop,String logradouro, String numero, 
+			String complemento, String bairro, String cep,String cidade,String estado) {
 		super();
 		this.id = id;
 		this.razaoSocial = razaoSocial;
@@ -97,6 +108,14 @@ public class PessoaJuridica implements Serializable {
 		this.cnpj = cnpj;
 		this.tipoPerfil = (tipoPerfil==null) ? null : tipoPerfil.getCod();;
 		this.senha = senha;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		
+		this.cidade = cidade;
+		this.estado = estado ;
 		this.fotoPerfil = fotoPerfil;
 		this.farmacia = farmacia;
 		this.banho = banho;
@@ -113,6 +132,10 @@ public class PessoaJuridica implements Serializable {
 		this.petClient = petClient;
 		this.petHome = petHome;
 		this.petShop = petShop;
+		this.descricaoPetClient = descricaoPetClient;
+		this.descricaoPetHome = descricaoPetHome;
+		this.descricaoPetShop = descricaoPetShop;
+		this.descricaoPetVet = descricaoPetVet;
 		
 		addPerfil(Perfil.SERVICO);
 	}
@@ -141,6 +164,64 @@ public class PessoaJuridica implements Serializable {
 		this.senha = senha;
 	}
 	
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
 	public TipoCliente getTipoPerfil() {
 		return TipoCliente.toEnum(tipoPerfil);
@@ -340,17 +421,38 @@ public class PessoaJuridica implements Serializable {
 	}
 
 
-
-
-
-	public List<EnderecoJuridico> getEnderecos() {
-		return enderecos;
+	
+	public String getDescricaoPetShop() {
+		return descricaoPetShop;
 	}
 
-
-	public void setEnderecos(List<EnderecoJuridico> enderecos) {
-		this.enderecos = enderecos;
+	public void setDescricaoPetShop(String descricaoPetShop) {
+		this.descricaoPetShop = descricaoPetShop;
 	}
+
+	public String getDescricaoPetVet() {
+		return descricaoPetVet;
+	}
+
+	public void setDescricaoPetVet(String descricaoPetVet) {
+		this.descricaoPetVet = descricaoPetVet;
+	}
+
+	public String getDescricaoPetHome() {
+		return descricaoPetHome;
+	}
+
+	public void setDescricaoPetHome(String descricaoPetHome) {
+		this.descricaoPetHome = descricaoPetHome;
+	}
+	public String getDescricaoPetClient() {
+		return descricaoPetClient;
+	}
+
+	public void setDescricaoPetClient(String descricaoPetClient) {
+		this.descricaoPetClient = descricaoPetClient;
+	}
+
 
 
 

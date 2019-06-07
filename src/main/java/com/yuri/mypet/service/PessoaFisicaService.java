@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.yuri.mypet.domain.EnderecoFisico;
 import com.yuri.mypet.domain.PessoaFisica;
 import com.yuri.mypet.domain.enums.TipoCliente;
 import com.yuri.mypet.dto.PessoaFisicaDTO;
@@ -47,7 +46,7 @@ public class PessoaFisicaService {
 	public PessoaFisica insert(PessoaFisica obj) {
 		obj.setId(null);
 		obj = repo.save(obj); // salva cliente
-		enderecoRepository.saveAll(obj.getEndereço()); // salva endereço
+	//	enderecoRepository.saveAll(obj.getEndereço()); // salva endereço
 		return obj;
 	}
 
@@ -99,17 +98,18 @@ public class PessoaFisicaService {
 
 	public PessoaFisica fromDto(PessoaFisicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 
-		return new PessoaFisica(objDto.getId(), objDto.getNomeCompleto(), objDto.getEmail(), null, null,null,null,null,false,objDto.getDataNascimento()); // nulo porque não temos os
+		return new PessoaFisica(objDto.getId(), objDto.getNomeCompleto(), objDto.getEmail(), null, null,null,null,null,false,objDto.getDataNascimento(),null,null,null,null,null,null,null); // nulo porque não temos os
 																								// daddos no DTO
 //		PessoaFisica p = new PessoaFisica(id, nomeCompleto, email, cpf, tipoPerfil, senha, fotoPerfil, descricao, petWalker, dataNascimento)
 	}
 
 	public PessoaFisica fromDto(PessoaFisicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 			
-		PessoaFisica cli1 = new PessoaFisica(null, objDto.getNomeCompleto(), objDto.getEmail(), objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricao(),false,objDto.getDataNascimento());
+		PessoaFisica cli1 = new PessoaFisica(null, objDto.getNomeCompleto(), objDto.getEmail(), objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricao(),false,objDto.getDataNascimento()
+				,objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado());
 	
-		EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
-		cli1.getEndereço().add(end); // cliente conhece seus endereços
+	//	EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
+     //	cli1.getEndereço().add(end); // cliente conhece seus endereços
 		cli1.getTelefones().add(objDto.getTelefone1());
 		if(objDto.getTelefone2() != null) {
 			cli1.getTelefones().add(objDto.getTelefone2());

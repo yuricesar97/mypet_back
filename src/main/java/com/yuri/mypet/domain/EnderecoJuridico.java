@@ -8,11 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class EnderecoJuridico implements Serializable {
@@ -29,12 +25,12 @@ public class EnderecoJuridico implements Serializable {
 	private String cep;
 	private String cidade;
 	private String estado;
-	
+	/**
 	@JsonIgnore 
 	@ManyToOne
 	@JoinColumn(name = "juridica_id")	
 	private PessoaJuridica pessoaJuridica;
-	
+	*/
 	@OneToMany(mappedBy = "enderecoDeEntrega")
 	private List<Pedido> enderecoDeEntrega = new ArrayList<Pedido>();
 	
@@ -42,8 +38,8 @@ public class EnderecoJuridico implements Serializable {
 		
 	}
 
-	public EnderecoJuridico (Integer id, String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado,
-			PessoaJuridica pessoaJuridica) {
+	public EnderecoJuridico (Integer id, String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado
+			) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -51,7 +47,7 @@ public class EnderecoJuridico implements Serializable {
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
-		this.pessoaJuridica = pessoaJuridica;
+		
 		this.cidade = cidade;
 		this.estado = estado ;
 	}
@@ -104,13 +100,7 @@ public class EnderecoJuridico implements Serializable {
 		this.cep = cep;
 	}
 
-	public PessoaJuridica getPessoaJuridica() {
-		return pessoaJuridica;
-	}
 
-	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-		this.pessoaJuridica = pessoaJuridica;
-	}
 	public String getCidade() {
 		return cidade;
 	}
