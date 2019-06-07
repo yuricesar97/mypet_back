@@ -1,0 +1,5 @@
+package com.mypet.myPetApp.dto;
+
+public class CredenciasDTO {
+
+}

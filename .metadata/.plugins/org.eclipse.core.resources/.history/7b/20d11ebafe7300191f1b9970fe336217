@@ -1,0 +1,46 @@
+package com.mypet.myPetApp.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.mypet.myPetApp.entity.PetVet;
+import com.mypet.myPetApp.entity.Petclient;
+import com.mypet.myPetApp.repository.PetVetRepository;
+import com.mypet.myPetApp.repository.PetclientRepository;
+import com.mypet.myPetApp.security.UserSS;
+
+
+@Service
+public class UserDetailsServiceImplPET implements UserDetailsService {  // permite busca pelo nome do usuario 
+
+	@Autowired
+	private PetclientRepository petclientRepository;
+	
+	@Autowired
+	private PetVetRepository petVetRepository;
+	
+	
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Petclient cli = petclientRepository.findByEmail(email);
+		PetVet vet = petVetRepository.findByEmail(email);
+
+		if(cli == null) {
+			throw new UsernameNotFoundException(email);	
+		}
+		else 
+		if(vet != null) {
+			return new UserSS(vet.getId(), vet.getEmail(), vet.getPassword(), vet.getPerfis());
+		}
+		
+			
+		return new UserSS(cli.getId(), cli.getEmail(), cli.getPassword(), cli.getPerfis());
+	}
+	
+	
+	} 
+
