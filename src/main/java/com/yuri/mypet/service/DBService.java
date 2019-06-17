@@ -94,7 +94,8 @@ public class DBService {
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5, produto6, produto7,
-				produto8, produto9, produto10, produto11));
+				produto8, produto9, produto10, produto11))
+		
 
 		PessoaFisica cli1 = new PessoaFisica(null, "Maria Silva", "yuricesar97@gmail.com", "36378912377",
 				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false, "21/04/1997",
@@ -124,20 +125,20 @@ public class DBService {
 		PessoaJuridica ju = new PessoaJuridica(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null, null, null, null, false, false, false, false,
 				false, true, true, false, false, true, false, false, false, false, false, "Rua Flores", "300",
-				"Apto 303", "Jardim", "38220834", "Araras", null);
+				"Apto 303", "Jardim", "38220834", "campinas", null);
 		// EnderecoJuridico end1 = new EnderecoJuridico(null, "Rua Flores", "300", "Apto
 		// 303", "Jardim", "38220834", "Arraras",null, ju );
 
 		PessoaJuridica pj = new PessoaJuridica(null, "PetVet Times", "cat@gmail.com", "58374829382-09",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null, null, null,
 				false, false, false, false, false, true, true, false, false, true, false, false, false, false, false,
-				"Rua Unidas", "100", "Apto 100", "Centro", "53829374827382", "Campinas", null);
+				"Rua Unidas", "100", "Apto 100", "Centro", "53829374827382", "campinas", null);
 
 		PessoaJuridica pj2 = new PessoaJuridica(null, "Mimo Pets", "teste@gmail.com", "183940482930-01",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, "Teste descricaoPetshop",
 				"Teste descricaoPetvet", "Teste descricaoPethome", "Teste descricaoPetclient", true, false, false,
 				false, false, true, true, false, false, true, false, false, false, false, true, "Rua Unidas", "100",
-				"Apto 100", "Centro", "13107110", "Campinas", "São Paulo");
+				"Apto 100", "Centro", "13107110", "SP", "São Paulo");
 
 		pessoaJuridicaRepository.saveAll(Arrays.asList(ju, pj, pj2));
 		/**
