@@ -182,9 +182,6 @@ public class PessoaFisicaNewDTO implements Serializable {
 		this.telefone3 = telefone3;
 	}
 
-
-
-
 	public String getSenha() {
 		return senha;
 	}
