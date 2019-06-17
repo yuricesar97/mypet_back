@@ -18,25 +18,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
 
-
 @Entity
 public class PessoaJuridica implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String razaoSocial;
-	
-	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo 
+
+	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo
 	private String email;
 	private String cnpj;
 	private Integer tipoPerfil;
-	
-	@JsonIgnore// para não aparecer no json
+
+	@JsonIgnore // para não aparecer no json
 	private String senha;
-	
+
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -44,78 +43,75 @@ public class PessoaJuridica implements Serializable {
 	private String cep;
 	private String cidade;
 	private String estado;
-	
+
 	private String fotoPerfil;
 	private String descricaoPetShop;
 	private String descricaoPetVet;
 	private String descricaoPetHome;
 	private String descricaoPetClient;
 
-	
 	private boolean petVet = false;
 	private boolean petClient = false;
 	private boolean petHome = false;
 	private boolean petShop = false;
-	
+
 	private boolean farmacia = false;
 	private boolean banho = false;
 	private boolean tosa = false;
 	private boolean loja = false;
-	
+
 	private boolean vacinacao = false;
 	private boolean consulta = false;
 	private boolean exames = false;
-	
+
 	private boolean apartamento = false;
 	private boolean casa = false;
 	private boolean fumante = false;
 	private boolean telado = false;
-	
+
 	/**
-	@OneToMany(mappedBy = "pessoaJuridica",cascade = CascadeType.ALL) // cascade, toda modificação que ocorrer no cliente ocorre em endereço com efeito cascata (quando apgar um cliente apaga um endereço tb)
-	private List<EnderecoJuridico> enderecos = new ArrayList<>();
-	*/
+	 * @OneToMany(mappedBy = "pessoaJuridica",cascade = CascadeType.ALL) // cascade,
+	 *                     toda modificação que ocorrer no cliente ocorre em
+	 *                     endereço com efeito cascata (quando apgar um cliente
+	 *                     apaga um endereço tb) private List<EnderecoJuridico>
+	 *                     enderecos = new ArrayList<>();
+	 */
 	@JsonIgnore // pedidos do clinete não sera serealizados.
-	
-	
+
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE_JURIDICO")//razaoSocial da tabela
-	private Set<String>telefones = new HashSet<>();//permite não repetir valores(represanta os conjuntos de valores )
-	
-	@ElementCollection(fetch = FetchType.EAGER)//traz o perfil junto
-	@CollectionTable(name="PERFIS_JURIDICO")
+	@CollectionTable(name = "TELEFONE_JURIDICO") // razaoSocial da tabela
+	private Set<String> telefones = new HashSet<>();// permite não repetir valores(represanta os conjuntos de valores )
+
+	@ElementCollection(fetch = FetchType.EAGER) // traz o perfil junto
+	@CollectionTable(name = "PERFIS_JURIDICO")
 	private Set<Integer> perfis = new HashSet<>();
-	
-	
-	
-	public PessoaJuridica(){
+
+	public PessoaJuridica() {
 		addPerfil(Perfil.SERVICO); // ja colocar que é um cliente
 	}
 
-	
-	
-	
-
 	public PessoaJuridica(Integer id, String razaoSocial, String email, String cnpj, TipoCliente tipoPerfil, String senha,
-			String fotoPerfil, String descricaoPetShop, String descricaoPetVet,String descricaoPetHome,String descricaoPetClient, boolean farmacia, boolean banho,
-			boolean tosa, boolean loja, boolean vacinacao, boolean consulta, boolean exames, boolean apartamento,
-			boolean casa, boolean fumante, boolean telado, boolean petVet,boolean petClient,boolean petHome,boolean petShop,String logradouro, String numero, 
-			String complemento, String bairro, String cep,String cidade,String estado) {
+			String fotoPerfil, String descricaoPetShop, String descricaoPetVet, String descricaoPetHome,
+			String descricaoPetClient, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
+			boolean consulta, boolean exames, boolean apartamento, boolean casa, boolean fumante, boolean telado,
+			boolean petVet, boolean petClient, boolean petHome, boolean petShop, String logradouro, String numero,
+			String complemento, String bairro, String cep, String cidade, String estado) {
 		super();
 		this.id = id;
 		this.razaoSocial = razaoSocial;
 		this.email = email;
 		this.cnpj = cnpj;
-		this.tipoPerfil = (tipoPerfil==null) ? null : tipoPerfil.getCod();;
+		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
+		;
 		this.senha = senha;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
-		
+
 		this.cidade = cidade;
-		this.estado = estado ;
+		this.estado = estado;
 		this.fotoPerfil = fotoPerfil;
 		this.farmacia = farmacia;
 		this.banho = banho;
@@ -136,7 +132,7 @@ public class PessoaJuridica implements Serializable {
 		this.descricaoPetHome = descricaoPetHome;
 		this.descricaoPetShop = descricaoPetShop;
 		this.descricaoPetVet = descricaoPetVet;
-		
+
 		addPerfil(Perfil.SERVICO);
 	}
 
@@ -163,12 +159,10 @@ public class PessoaJuridica implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
 
 	public String getLogradouro() {
 		return logradouro;
 	}
-
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
@@ -181,7 +175,6 @@ public class PessoaJuridica implements Serializable {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
 
 	public String getComplemento() {
 		return complemento;
@@ -226,22 +219,18 @@ public class PessoaJuridica implements Serializable {
 	public TipoCliente getTipoPerfil() {
 		return TipoCliente.toEnum(tipoPerfil);
 	}
-	
-	public  Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
+
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); // converte para perfil
 	}
-	
-	public void addPerfil (Perfil perfil) {
+
+	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
 	}
 
 	public void setTipoPerfil(TipoCliente tipoPerfil) {
 		this.tipoPerfil = tipoPerfil.getCod();
 	}
-
-	
-
-	
 
 	public Set<String> getTelefones() {
 		return telefones;
@@ -251,8 +240,6 @@ public class PessoaJuridica implements Serializable {
 		this.telefones = telefones;
 	}
 
-
-
 	public String getFotoPerfil() {
 		return fotoPerfil;
 	}
@@ -260,7 +247,7 @@ public class PessoaJuridica implements Serializable {
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
-	
+
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
@@ -297,7 +284,6 @@ public class PessoaJuridica implements Serializable {
 		return tosa;
 	}
 
-
 	public void setTosa(boolean tosa) {
 		this.tosa = tosa;
 	}
@@ -306,7 +292,7 @@ public class PessoaJuridica implements Serializable {
 		return loja;
 	}
 
-    public void setLoja(boolean loja) {
+	public void setLoja(boolean loja) {
 		this.loja = loja;
 	}
 
@@ -346,32 +332,26 @@ public class PessoaJuridica implements Serializable {
 		return casa;
 	}
 
-    public void setCasa(boolean casa) {
+	public void setCasa(boolean casa) {
 		this.casa = casa;
 	}
-
 
 	public boolean isFumante() {
 		return fumante;
 	}
 
-
 	public void setFumante(boolean fumante) {
 		this.fumante = fumante;
 	}
-
 
 	public boolean isTelado() {
 		return telado;
 	}
 
-
-
 	public void setTelado(boolean telado) {
 		this.telado = telado;
 	}
-	
-    
+
 	public boolean isPetVet() {
 		return petVet;
 	}
@@ -388,40 +368,22 @@ public class PessoaJuridica implements Serializable {
 		this.petClient = petClient;
 	}
 
-
-
-
-
 	public boolean isPetHome() {
 		return petHome;
 	}
-
-
-
-
 
 	public void setPetHome(boolean petHome) {
 		this.petHome = petHome;
 	}
 
-
-
-
-
 	public boolean isPetShop() {
 		return petShop;
 	}
-
-
-
-
 
 	public void setPetShop(boolean petShop) {
 		this.petShop = petShop;
 	}
 
-
-	
 	public String getDescricaoPetShop() {
 		return descricaoPetShop;
 	}
@@ -445,6 +407,7 @@ public class PessoaJuridica implements Serializable {
 	public void setDescricaoPetHome(String descricaoPetHome) {
 		this.descricaoPetHome = descricaoPetHome;
 	}
+
 	public String getDescricaoPetClient() {
 		return descricaoPetClient;
 	}
@@ -452,10 +415,6 @@ public class PessoaJuridica implements Serializable {
 	public void setDescricaoPetClient(String descricaoPetClient) {
 		this.descricaoPetClient = descricaoPetClient;
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -482,11 +441,4 @@ public class PessoaJuridica implements Serializable {
 		return true;
 	}
 
-	
-
-
-
-	
-	
-	
 }
