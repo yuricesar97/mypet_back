@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.yuri.mypet.domain.EnderecoFisico;
 import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.service.validation.JuridicoUpdate;
 
@@ -34,6 +33,7 @@ public class PessoaJuridicaDTO implements Serializable {
 	private String cidade;
 	private String estado;
 
+	private String fotoPerfil;
 	private String descricaoPetShop;
 	private String descricaoPetVet;
 	private String descricaoPetHome;
@@ -45,6 +45,11 @@ public class PessoaJuridicaDTO implements Serializable {
 	private boolean banho = false;
 	private boolean tosa = false;
 	private boolean loja = false;
+	
+	private boolean petVet = false;
+	private boolean petClient = false;
+	private boolean petHome = false;
+	private boolean petShop = false;
 
 	private boolean vacinacao = false;
 	private boolean consulta = false;
@@ -71,6 +76,27 @@ public class PessoaJuridicaDTO implements Serializable {
 		bairro = obj.getBairro();
 		cidade = obj.getCidade();
 		estado = obj.getEstado();
+		fotoPerfil = obj.getFotoPerfil();
+		farmacia = obj.isFarmacia();
+		banho = obj.isBanho();
+		tosa = obj.isTosa();
+		loja = obj.isLoja();
+		vacinacao = obj.isVacinacao();
+		consulta = obj.isConsulta();
+		 exames = obj.isExames();
+		 apartamento = obj.isApartamento();
+		 casa = obj.isCasa();
+		 fumante = obj.isFumante();
+		 telado = obj.isTelado();
+		 petVet = obj.isPetVet();
+		 petClient = obj.isPetClient();
+		 petHome = obj.isPetHome();
+		 petShop = obj.isPetShop();
+		 descricaoPetClient = obj.getDescricaoPetClient();
+		 descricaoPetHome = obj.getDescricaoPetHome();
+		 descricaoPetShop =  obj.getDescricaoPetShop();
+		 descricaoPetVet = obj.getDescricaoPetVet();
+		 situacaoAprovacao = obj.getSituacaoAprovacao();
 
 	}
 
@@ -300,5 +326,54 @@ public class PessoaJuridicaDTO implements Serializable {
 	public void setSituacaoAprovacao(String situacaoAprovacao) {
 		this.situacaoAprovacao = situacaoAprovacao;
 	}
+
+	public boolean isCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(boolean checkStatus) {
+		this.checkStatus = checkStatus;
+	}
+
+	public String getFotoPerfil() {
+		return fotoPerfil;
+	}
+
+	public void setFotoPerfil(String fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
+
+	public boolean isPetVet() {
+		return petVet;
+	}
+
+	public void setPetVet(boolean petVet) {
+		this.petVet = petVet;
+	}
+
+	public boolean isPetClient() {
+		return petClient;
+	}
+
+	public void setPetClient(boolean petClient) {
+		this.petClient = petClient;
+	}
+
+	public boolean isPetHome() {
+		return petHome;
+	}
+
+	public void setPetHome(boolean petHome) {
+		this.petHome = petHome;
+	}
+
+	public boolean isPetShop() {
+		return petShop;
+	}
+
+	public void setPetShop(boolean petShop) {
+		this.petShop = petShop;
+	}
+	
 
 }
