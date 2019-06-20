@@ -30,7 +30,7 @@ public class PessoaFisica implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nomeCompleto;
+	private String username;
 	
 	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo 
 	private String email;
@@ -62,7 +62,7 @@ public class PessoaFisica implements Serializable {
 	private List<Pedido> pedidos = new ArrayList<>(); 
 	
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")//nomeCompleto da tabela
+	@CollectionTable(name = "TELEFONE")//username da tabela
 	private Set<String>telefones = new HashSet<>();//permite não repetir valores(represanta os conjuntos de valores )
 	
 	@ElementCollection(fetch = FetchType.EAGER)//traz o perfil junto
@@ -75,11 +75,11 @@ public class PessoaFisica implements Serializable {
 		addPerfil(Perfil.ADMIN); // ja colocar que é um cliente
 	}
 
-	public PessoaFisica(Integer id, String nomeCompleto,String email, String cpf, TipoCliente tipoPerfil,String senha,String fotoPerfil,String descricao,boolean petWalker,String dataNascimento
+	public PessoaFisica(Integer id, String username,String email, String cpf, TipoCliente tipoPerfil,String senha,String fotoPerfil,String descricao,boolean petWalker,String dataNascimento
 			,String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado) {
 		super();
 		this.id = id;
-		this.nomeCompleto = nomeCompleto;
+		this.username = username;
 		this.email = email;
 		this.cpf = cpf;
 		this.tipoPerfil = (tipoPerfil==null) ? null : tipoPerfil.getCod(); //operador ternario ..  na intaciação não aceita nullo precisa de uma condicional por conta do getCod
@@ -106,8 +106,8 @@ public class PessoaFisica implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getUsername() {
+		return username;
 	}
 	public String getEmail() {
 		return email;
@@ -183,8 +183,8 @@ public class PessoaFisica implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getCpf() {

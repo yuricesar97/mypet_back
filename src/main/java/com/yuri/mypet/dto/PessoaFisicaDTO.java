@@ -21,7 +21,7 @@ public class PessoaFisicaDTO implements Serializable {
 	
 	@NotEmpty(message = "Prenchimento obrigatório")
 	@Length(min=5,max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
-	private String nomeCompleto;
+	private String username;
 	
 	@NotEmpty(message = "Preechimento obrigatório")
 	@Email(message = "Email inválido")
@@ -42,7 +42,7 @@ public class PessoaFisicaDTO implements Serializable {
 	public PessoaFisicaDTO(PessoaFisica obj) { // construtor sera respnosavel por instanciar um DTO com os dados que desejo
 	
 		id = obj.getId();
-		nomeCompleto = obj.getNomeCompleto();
+		username = obj.getUsername();
 	   email = obj.getEmail();
 	   cpf = obj.getCpf();
 	   dataNascimento = obj.getDataNascimento();
@@ -80,14 +80,14 @@ public class PessoaFisicaDTO implements Serializable {
 
 
 	public String getNomeCompleto() {
-		return nomeCompleto;
+		return username;
 	}
 
 
 
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

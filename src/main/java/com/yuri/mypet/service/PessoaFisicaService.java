@@ -105,7 +105,7 @@ public class PessoaFisicaService {
 
 	public PessoaFisica fromDto(PessoaFisicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 			
-		PessoaFisica cli1 = new PessoaFisica(null, objDto.getNomeCompleto(), objDto.getEmail(), objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricao(),false,objDto.getDataNascimento()
+		PessoaFisica cli1 = new PessoaFisica(null, objDto.getUsername(),objDto.getEmail(), objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricao(),false,objDto.getDataNascimento()
 				,objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado());
 	
 	//	EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
@@ -123,7 +123,7 @@ public class PessoaFisicaService {
 
 	private void updateData(PessoaFisica newObj, PessoaFisica obj) { // metado aux para atualizar os campos do cliente, pegando o
 															// novo e colocando no antigo
-		newObj.setNomeCompleto(obj.getNomeCompleto());
+		newObj.setUsername(obj.getUsername());
 		newObj.setEmail(obj.getEmail());
 	
 		

@@ -151,7 +151,7 @@ public class Pedido {
 		builder.append(", Instante: ");
 		builder.append(sdf.format(getInstante()));
 		builder.append(", Cliente: ");
-		builder.append(getCliente().getNomeCompleto());
+		builder.append(getCliente().getUsername());
 		builder.append(", Situação do pagamento: ");
 		builder.append(getPagamento().getEstado().getDescricao());
 		builder.append("\nDetalhes:\n");

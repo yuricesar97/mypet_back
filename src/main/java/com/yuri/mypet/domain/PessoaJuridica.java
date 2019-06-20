@@ -49,7 +49,9 @@ public class PessoaJuridica implements Serializable {
 	private String descricaoPetVet;
 	private String descricaoPetHome;
 	private String descricaoPetClient;
+	private String situacaoAprovacao;
 
+	private boolean checkStatus = false;
 	private boolean petVet = false;
 	private boolean petClient = false;
 	private boolean petHome = false;
@@ -92,9 +94,9 @@ public class PessoaJuridica implements Serializable {
 
 	public PessoaJuridica(Integer id, String razaoSocial, String email, String cnpj, TipoCliente tipoPerfil, String senha,
 			String fotoPerfil, String descricaoPetShop, String descricaoPetVet, String descricaoPetHome,
-			String descricaoPetClient, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
+			String descricaoPetClient,String situacaoAprovacao, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
 			boolean consulta, boolean exames, boolean apartamento, boolean casa, boolean fumante, boolean telado,
-			boolean petVet, boolean petClient, boolean petHome, boolean petShop, String logradouro, String numero,
+			boolean petVet, boolean petClient, boolean petHome, boolean petShop,boolean checkStatus, String logradouro, String numero,
 			String complemento, String bairro, String cep, String cidade, String estado) {
 		super();
 		this.id = id;
@@ -132,6 +134,7 @@ public class PessoaJuridica implements Serializable {
 		this.descricaoPetHome = descricaoPetHome;
 		this.descricaoPetShop = descricaoPetShop;
 		this.descricaoPetVet = descricaoPetVet;
+		this.situacaoAprovacao = situacaoAprovacao;
 
 		addPerfil(Perfil.SERVICO);
 	}
@@ -439,6 +442,22 @@ public class PessoaJuridica implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getSituacaoAprovacao() {
+		return situacaoAprovacao;
+	}
+
+	public void setSituacaoAprovacao(String situacaoAprovacao) {
+		this.situacaoAprovacao = situacaoAprovacao;
+	}
+
+	public boolean isCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(boolean checkStatus) {
+		this.checkStatus = checkStatus;
 	}
 
 }

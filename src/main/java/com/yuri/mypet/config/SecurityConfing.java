@@ -81,7 +81,7 @@ public class SecurityConfing extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated();
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil,userDetailsService));
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // para não criar sessão de
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().logout(); // para não criar sessão de
 																							// usuario
 	}
 	@Override

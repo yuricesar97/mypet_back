@@ -101,14 +101,14 @@ public class PessoaJuridicaService {
 	public PessoaJuridica fromDto(PessoaJuridicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 
 		
-		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), null, null, null,null,null,null,null, false, false, false, false, false, false, false, false, false, false, false,false,false,false,false,null,null,null,null,null,null,null);
+		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), null, null, null,null,null,null,null,null, false, false, false, false, false, false, false, false, false, false, false,false,false,false,false,false,null,null,null,null,null,null,null);
 	}
 
 	public PessoaJuridica fromDto(PessoaJuridicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 			
-	//	PessoaJuridica cli1 = new PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, descricaoPetShop, descricaoPetVet, descricaoPetHome, descricaoPetClient, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop, logradouro, numero, complemento, bairro, cep, cidade, estado)
-		PessoaJuridica cli1 = new PessoaJuridica(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetClient(),objDto.getDescricaoPetHome(),objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),objDto.isFarmacia(),
-				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop(),objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep()
+		//PessoaJuridica cli1 = new PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, descricaoPetShop, descricaoPetVet, descricaoPetHome, descricaoPetClient, situacaoAprovacao, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop, checkStatus, logradouro, numero, complemento, bairro, cep, cidade, estado)
+		PessoaJuridica cli1 = new PessoaJuridica(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetClient(),objDto.getDescricaoPetHome(),null,objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),objDto.isFarmacia(),
+				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep()
 				              ,objDto.getCidade(),objDto.getEstado());
 	
 	//	EnderecoJuridico end = new EnderecoJuridico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes

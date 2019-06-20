@@ -54,7 +54,9 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	private String descricaoPetVet;
 	private String descricaoPetHome;
 	private String descricaoPetClient;
+	private String situacaoAprovacao;
 	
+	private boolean checkStatus = false;
 	private boolean petVet = false;
 	private boolean petClient = false;
 	private boolean petHome = false;
@@ -389,6 +391,22 @@ public class PessoaJuridicaNewDTO implements Serializable {
 
 	public void setPetShop(boolean petShop) {
 		this.petShop = petShop;
+	}
+
+	public boolean isCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(boolean checkStatus) {
+		this.checkStatus = checkStatus;
+	}
+
+	public String getSituacaoAprovacao() {
+		return situacaoAprovacao;
+	}
+
+	public void setSituacaoAprovacao(String situacaoAprovacao) {
+		this.situacaoAprovacao = situacaoAprovacao;
 	}
 	
 	

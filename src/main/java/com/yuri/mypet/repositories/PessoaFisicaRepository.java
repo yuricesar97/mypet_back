@@ -12,5 +12,9 @@ import com.yuri.mypet.domain.PessoaFisica;
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Integer>{
   
      @Transactional(readOnly = true) // diz que transação não necessita ser envolvida no banco de dados
-     PessoaFisica  findByEmail(String email); // cria busca com o campo Email
+     PessoaFisica  findByUsername(String username); // cria busca com o campo Email
+     
+     
+     @Transactional(readOnly = true)
+     PessoaFisica  findByEmail(String email);
 }  

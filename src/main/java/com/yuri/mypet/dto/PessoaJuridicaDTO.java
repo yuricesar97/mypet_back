@@ -38,7 +38,9 @@ public class PessoaJuridicaDTO implements Serializable {
 	private String descricaoPetVet;
 	private String descricaoPetHome;
 	private String descricaoPetClient;
+	private String situacaoAprovacao;
 
+	private boolean checkStatus = false;
 	private boolean farmacia = false;
 	private boolean banho = false;
 	private boolean tosa = false;
@@ -289,6 +291,14 @@ public class PessoaJuridicaDTO implements Serializable {
 
 	public void setTelado(boolean telado) {
 		this.telado = telado;
+	}
+
+	public String getSituacaoAprovacao() {
+		return situacaoAprovacao;
+	}
+
+	public void setSituacaoAprovacao(String situacaoAprovacao) {
+		this.situacaoAprovacao = situacaoAprovacao;
 	}
 
 }

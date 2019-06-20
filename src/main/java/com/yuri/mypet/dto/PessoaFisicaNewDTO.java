@@ -17,7 +17,7 @@ public class PessoaFisicaNewDTO implements Serializable {
 	
 	@NotEmpty(message = "Prenchimento obrigatório")
 	@Length(min=5,max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
-	private String nomeCompleto;
+	private String username;
 	
 	@NotEmpty(message = "Preechimento obrigatório")
 	@Email(message = "Email inválido")
@@ -72,13 +72,13 @@ public class PessoaFisicaNewDTO implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getUsername() {
+		return username;
 	}
 
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
