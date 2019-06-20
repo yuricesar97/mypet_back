@@ -21,25 +21,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
 
-
 @Entity
 public class PessoaFisica implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String username;
-	
-	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo 
+	private String nomeCompleto;
+
+	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo
 	private String email;
 	private String cpf;
 	private Integer tipoPerfil;
-	
-	@JsonIgnore// para não aparecer no json
+
+	@JsonIgnore // para não aparecer no json
 	private String senha;
-	
+
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -47,42 +47,47 @@ public class PessoaFisica implements Serializable {
 	private String cep;
 	private String cidade;
 	private String estado;
-	
+
 	private String fotoPerfil;
 	private boolean petWalker = false;
 	private String descricao;
 	private String dataNascimento;
-	
+
 	/**
-	@OneToMany(mappedBy = "pessoaFisica",cascade = CascadeType.ALL) // cascade, toda modificação que ocorrer no cliente ocorre em endereço com efeito cascata (quando apgar um cliente apaga um endereço tb)
-	private List<EnderecoFisico> enderecos = new ArrayList<>();
-	*/
+	 * @OneToMany(mappedBy = "pessoaFisica",cascade = CascadeType.ALL) // cascade,
+	 *                     toda modificação que ocorrer no cliente ocorre em
+	 *                     endereço com efeito cascata (quando apgar um cliente
+	 *                     apaga um endereço tb) private List<EnderecoFisico>
+	 *                     enderecos = new ArrayList<>();
+	 */
 	@JsonIgnore // pedidos do clinete não sera serealizados.
 	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedidos = new ArrayList<>(); 
-	
+	private List<Pedido> pedidos = new ArrayList<>();
+
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")//username da tabela
-	private Set<String>telefones = new HashSet<>();//permite não repetir valores(represanta os conjuntos de valores )
-	
-	@ElementCollection(fetch = FetchType.EAGER)//traz o perfil junto
-	@CollectionTable(name="PERFIS")
+	@CollectionTable(name = "TELEFONE") // username da tabela
+	private Set<String> telefones = new HashSet<>();// permite não repetir valores(represanta os conjuntos de valores )
+
+	@ElementCollection(fetch = FetchType.EAGER) // traz o perfil junto
+	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
-	
-	
-	
-	public PessoaFisica(){
+
+	public PessoaFisica() {
 		addPerfil(Perfil.ADMIN); // ja colocar que é um cliente
 	}
 
-	public PessoaFisica(Integer id, String username,String email, String cpf, TipoCliente tipoPerfil,String senha,String fotoPerfil,String descricao,boolean petWalker,String dataNascimento
-			,String logradouro, String numero, String complemento, String bairro, String cep,String cidade,String estado) {
+	public PessoaFisica(Integer id, String username, String nomeCompleto, String email, String cpf,
+			TipoCliente tipoPerfil, String senha, String fotoPerfil, String descricao, boolean petWalker,
+			String dataNascimento, String logradouro, String numero, String complemento, String bairro, String cep,
+			String cidade, String estado) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.cpf = cpf;
-		this.tipoPerfil = (tipoPerfil==null) ? null : tipoPerfil.getCod(); //operador ternario ..  na intaciação não aceita nullo precisa de uma condicional por conta do getCod
+		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod(); // operador ternario .. na intaciação não
+																				// aceita nullo precisa de uma
+																				// condicional por conta do getCod
 		this.senha = senha;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -95,6 +100,7 @@ public class PessoaFisica implements Serializable {
 		this.petWalker = petWalker;
 		this.descricao = descricao;
 		this.dataNascimento = dataNascimento;
+		this.nomeCompleto = nomeCompleto;
 		addPerfil(Perfil.ADMIN);
 	}
 
@@ -109,6 +115,7 @@ public class PessoaFisica implements Serializable {
 	public String getUsername() {
 		return username;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -120,7 +127,6 @@ public class PessoaFisica implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
-	
 
 	public String getLogradouro() {
 		return logradouro;
@@ -178,11 +184,10 @@ public class PessoaFisica implements Serializable {
 		this.estado = estado;
 	}
 
-
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -198,12 +203,12 @@ public class PessoaFisica implements Serializable {
 	public TipoCliente getTipoPerfil() {
 		return TipoCliente.toEnum(tipoPerfil);
 	}
-	
-	public  Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); //converte para perfil
+
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); // converte para perfil
 	}
-	
-	public void addPerfil (Perfil perfil) {
+
+	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
 	}
 
@@ -211,7 +216,6 @@ public class PessoaFisica implements Serializable {
 		this.tipoPerfil = tipoPerfil.getCod();
 	}
 
-	
 	public Set<String> getTelefones() {
 		return telefones;
 	}
@@ -219,6 +223,7 @@ public class PessoaFisica implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -226,7 +231,7 @@ public class PessoaFisica implements Serializable {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -242,7 +247,6 @@ public class PessoaFisica implements Serializable {
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
-	
 
 	public String getDataNascimento() {
 		return dataNascimento;
@@ -251,6 +255,7 @@ public class PessoaFisica implements Serializable {
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -284,11 +289,18 @@ public class PessoaFisica implements Serializable {
 		petWalker = petWalker;
 	}
 
-	
+	/**
+	 * @return the nomeCompleto
+	 */
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
 
+	/**
+	 * @param nomeCompleto the nomeCompleto to set
+	 */
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
 
-
-	
-	
-	
 }

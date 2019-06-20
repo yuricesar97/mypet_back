@@ -31,7 +31,6 @@ public class PessoaFisicaService {
 	EnderecoFisicoRepository enderecoRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
 
 	public PessoaFisica find(Integer id) {
 
@@ -46,7 +45,7 @@ public class PessoaFisicaService {
 	public PessoaFisica insert(PessoaFisica obj) {
 		obj.setId(null);
 		obj = repo.save(obj); // salva cliente
-	//	enderecoRepository.saveAll(obj.getEndereço()); // salva endereço
+		// enderecoRepository.saveAll(obj.getEndereço()); // salva endereço
 		return obj;
 	}
 
@@ -71,13 +70,15 @@ public class PessoaFisicaService {
 		return repo.findAll();
 	}
 
-	public Page<PessoaFisica> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page vai
-																											// encapsular
-																											// informações
-																											// e
-																											// operações
-																											// sobre a
-																											// paginação
+	public Page<PessoaFisica> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page
+																												// vai
+																												// encapsular
+																												// informações
+																												// e
+																												// operações
+																												// sobre
+																												// a
+																												// paginação
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy); // prepara
 																												// as
@@ -96,36 +97,50 @@ public class PessoaFisicaService {
 		return repo.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
 	}
 
-	public PessoaFisica fromDto(PessoaFisicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
+	public PessoaFisica fromDto(PessoaFisicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um
+															// DTO
 
-		return new PessoaFisica(objDto.getId(), objDto.getNomeCompleto(), objDto.getEmail(), null, null,null,null,null,false,objDto.getDataNascimento(),null,null,null,null,null,null,null); // nulo porque não temos os
-																								// daddos no DTO
-//		PessoaFisica p = new PessoaFisica(id, nomeCompleto, email, cpf, tipoPerfil, senha, fotoPerfil, descricao, petWalker, dataNascimento)
+		return new PessoaFisica(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(), null,
+				null, null, null, null, false, objDto.getDataNascimento(), null, null, null, null, null, null, null); // nulo
+																														// porque
+																														// não
+																														// temos
+																														// os
+		// daddos no DTO
+		// PessoaFisica p = new PessoaFisica(id, nomeCompleto, email, cpf, tipoPerfil,
+		// senha, fotoPerfil, descricao, petWalker, dataNascimento)
 	}
 
-	public PessoaFisica fromDto(PessoaFisicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
-			
-		PessoaFisica cli1 = new PessoaFisica(null, objDto.getUsername(),objDto.getEmail(), objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricao(),false,objDto.getDataNascimento()
-				,objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado());
-	
-	//	EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
-     //	cli1.getEndereço().add(end); // cliente conhece seus endereços
+	public PessoaFisica fromDto(PessoaFisicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de
+																// um DTO
+
+		PessoaFisica cli1 = new PessoaFisica(null, objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
+				objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),
+				bCryptPasswordEncoder.encode(objDto.getSenha()), null, objDto.getDescricao(), false,
+				objDto.getDataNascimento(), objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
+				objDto.getBairro(), objDto.getCep(), objDto.getCidade(), objDto.getEstado());
+
+		// EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(),
+		// objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(),
+		// objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços
+		// conhece os clientes
+		// cli1.getEndereço().add(end); // cliente conhece seus endereços
 		cli1.getTelefones().add(objDto.getTelefone1());
-		if(objDto.getTelefone2() != null) {
+		if (objDto.getTelefone2() != null) {
 			cli1.getTelefones().add(objDto.getTelefone2());
 		}
-		if(objDto.getTelefone3() != null) {
+		if (objDto.getTelefone3() != null) {
 			cli1.getTelefones().add(objDto.getTelefone3());
 		}
-		
+
 		return cli1;
 	}
 
-	private void updateData(PessoaFisica newObj, PessoaFisica obj) { // metado aux para atualizar os campos do cliente, pegando o
-															// novo e colocando no antigo
+	private void updateData(PessoaFisica newObj, PessoaFisica obj) { // metado aux para atualizar os campos do cliente,
+																		// pegando o
+		// novo e colocando no antigo
 		newObj.setUsername(obj.getUsername());
 		newObj.setEmail(obj.getEmail());
-	
-		
+
 	}
 }
