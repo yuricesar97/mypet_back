@@ -8,27 +8,28 @@ import org.springframework.stereotype.Service;
 
 
 import com.yuri.mypet.domain.PessoaFisica;
-
+import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.repositories.PessoaFisicaRepository;
+import com.yuri.mypet.repositories.PessoaJuridicaRepository;
 import com.yuri.mypet.security.UserSS;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {  // permite busca pelo nome do usuario 
 
 	@Autowired
-	private PessoaFisicaRepository clienteRepositoty;
+	private PessoaJuridicaRepository pessoaJuridicaRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		PessoaFisica cli = clienteRepositoty.findByEmail(email);
+		PessoaJuridica ju = pessoaJuridicaRepository.findByEmail(email);
 		
-		if(cli == null) {
+		if(ju == null) {
 			throw new UsernameNotFoundException(email);	
 		}
 		
 	
 		
-		return new UserSS(cli.getId(), cli.getUsername(), cli.getSenha(), cli.getPerfis());
+		return new UserSS(ju.getId(), ju.getEmail(), ju.getSenha(), ju.getPerfis());
 	}
 	
 
