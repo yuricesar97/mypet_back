@@ -93,12 +93,12 @@ public class SecurityConfing extends WebSecurityConfigurerAdapter {
 	
 	
 
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-		return source; // permitindo o acesso por multiplas por configurações basicas
-	}
+	//@Bean
+	//CorsConfigurationSource corsConfigurationSource() {
+	//	final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	//	source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+	//	return source; // permitindo o acesso por multiplas por configurações basicas
+	//}
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {

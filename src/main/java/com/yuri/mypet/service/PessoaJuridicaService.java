@@ -41,14 +41,14 @@ public class PessoaJuridicaService {
 				"Objeto não encontrado! id: " + id + ", tipo: " + PessoaJuridica.class.getName()));
 	}
 
-	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma
-					// tra)
+	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma// tra)
 	public PessoaJuridica insert(PessoaJuridica obj) {
 		obj.setId(null);
 		obj = repo.save(obj); // salva cliente
 	//	enderecoRepository.saveAll(obj.getEnderecos()); // salva endereço
 		return obj;
 	}
+
 
 	public PessoaJuridica update(PessoaJuridica obj) {
 		PessoaJuridica newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
@@ -101,7 +101,13 @@ public class PessoaJuridicaService {
 	public PessoaJuridica fromDto(PessoaJuridicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 
 		
-		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), null, null, null,null,null,null,null,null, false, false, false, false, false, false, false, false, false, false, false,false,false,false,false,false,null,null,null,null,null,null,null);
+		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(),
+				null, null, null,objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),
+				objDto.getDescricaoPetHome(),objDto.getDescricaoPetClient(),objDto.getSituacaoAprovacao(), objDto.isFarmacia(),
+				objDto.isBanho(), objDto.isTosa(), objDto.isLoja(), objDto.isVacinacao(), objDto.isConsulta(), objDto.isExames(),
+				objDto.isApartamento(),objDto.isCasa(), objDto.isFumante(), objDto.isTelado(),objDto.isPetVet(),objDto.isPetClient(),
+				objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(),objDto.getNumero(),
+				objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),objDto.getCidade(),objDto.getEstado());
 	}
 
 	public PessoaJuridica fromDto(PessoaJuridicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
@@ -128,7 +134,40 @@ public class PessoaJuridicaService {
 															// novo e colocando no antigo
 		newObj.setRazaoSocial(obj.getRazaoSocial());
 		newObj.setEmail(obj.getEmail());
-	
+		newObj.setId(obj.getId());
+		newObj.setApartamento(obj.isApartamento());
+		newObj.setBairro(obj.getBairro());
+		newObj.setBanho(obj.isBanho());
+		newObj.setCasa(obj.isCasa());
+		newObj.setCep(obj.getCep());
+		newObj.setCheckStatus(obj.isCheckStatus());
+		newObj.setCidade(obj.getCidade());
+		newObj.setCnpj(obj.getCnpj());
+		newObj.setComplemento(obj.getComplemento());
+		newObj.setConsulta(obj.isConsulta());
+		newObj.setDescricaoPetClient(obj.getDescricaoPetClient());
+		newObj.setDescricaoPetHome(obj.getDescricaoPetHome());
+		newObj.setDescricaoPetShop(obj.getDescricaoPetShop());
+		newObj.setDescricaoPetVet(obj.getDescricaoPetVet());
+		newObj.setEstado(obj.getEstado());
+		newObj.setExames(obj.isExames());
+		newObj.setFarmacia(obj.isFarmacia());
+		newObj.setFotoPerfil(obj.getFotoPerfil());
+		newObj.setFumante(obj.isFumante());
+		newObj.setLogradouro(obj.getLogradouro());
+		newObj.setLoja(obj.isLoja());
+		newObj.setNumero(obj.getNumero());
+		newObj.setPetClient(obj.isPetClient());
+		newObj.setPetHome(obj.isPetHome());
+		newObj.setPetShop(obj.isPetShop());
+		newObj.setPetVet(obj.isPetVet());
+		newObj.setSenha(obj.getSenha());
+		newObj.setSituacaoAprovacao(obj.getSituacaoAprovacao());
+		newObj.setTelado(obj.isTelado());
+		//newObj.setTelefones(obj.getTelefones());
+		//newObj.setTipoPerfil(obj.getTipoPerfil());
+		newObj.setTosa(obj.isTosa());
+		newObj.setVacinacao(obj.isVacinacao());
 		
 	}
 }

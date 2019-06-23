@@ -31,12 +31,14 @@ public class PessoaJuridicaResource {
 	@Autowired
 	private PessoaJuridicaService service;
 
+	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET) // para bater em um end pont com id
 	public ResponseEntity<PessoaJuridica> buscar(@PathVariable Integer id) {
 		PessoaJuridica obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaJuridicaNewDTO objDto) { // requestBody faz o json ser
 																							// convertido para obj//
@@ -47,6 +49,7 @@ public class PessoaJuridicaResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody PessoaJuridicaDTO objDto, @PathVariable Integer id) {// receber
 																												// o
@@ -61,6 +64,7 @@ public class PessoaJuridicaResource {
 	}
 
 	// @PreAuthorize("hasAnyRole('ADMIN')")
+	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // para bater em um end pont com id
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
@@ -83,6 +87,7 @@ public class PessoaJuridicaResource {
 	}
 
 	// @PreAuthorize("hasAnyRole('ADMIN')")
+	@CrossOrigin
 	@RequestMapping(value = "/page", method = RequestMethod.GET) // paginação
 	public ResponseEntity<Page<PessoaJuridicaDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,

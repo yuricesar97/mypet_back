@@ -165,40 +165,47 @@ public class DBService {
 		clienteRepositoty.saveAll(Arrays.asList(cli1, cli2, cli3, cli4, cli5, cli6));
 		// enderecoRepositoty.saveAll(Arrays.asList(e1,e2,e3));
 
-		PessoaJuridica ju1 = new PessoaJuridica(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
+		PessoaJuridica ju1 = new PessoaJuridica(null, "mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null, "Somos o profisional que o seu animal precisa",
 				null, null, null, false, false, false, false, false, false, false, false, false, false, false, true,
 				false, false, false, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Santos", null);
+
 		PessoaJuridica ju2 = new PessoaJuridica(null, "MyCia", "cia@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null,
 				"Temos todo o cuidado com seu animal, hospital 24 horas", null, null, null, false, false, false, false,
 				false, false, false, false, false, false, false, true, false, false, false, false, "Rua dolores", "300",
 				"Apto 303", "Chácaras São Paulo", "38220834", "Franca", null);
+
 		PessoaJuridica ju3 = new PessoaJuridica(null, "MyVet", "vet@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null,
 				"Cuidando do seu pet onde você estiver, qualidade e segurança", null, null, null, false, false, false,
 				false, false, false, false, false, false, false, true, false, false, false, false, false, "Rua gilda",
 				"300", "Apto 303", "Rua Flores", "38220834", "Bauru", null);
+
 		PessoaJuridica ju13 = new PessoaJuridica(null, "MyCat", "cat@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null,
 				"Cuidando do seu gato onde você estiver, qualidade e segurança", null, null, null, false, false, false,
 				false, false, false, false, false, false, false, true, false, false, false, false, false, "Rua gilda",
 				"300", "Apto 303", "Rua Flores", "38220834", "Sumaré", null);
 
+
 		PessoaJuridica ju4 = new PessoaJuridica(null, "Petz", "petz@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, "Temos sempre pomoções que favorecem o seu pet", null,
 				null, null, null, false, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, true, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Marília", null);
+
 		PessoaJuridica ju5 = new PessoaJuridica(null, "	ClubPet", "club@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, "Realizamos banho e tosa",
 				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
-				"Franca", null);
+				"campinas", null);
+
 		PessoaJuridica ju6 = new PessoaJuridica(null, "CaninPet", "canin@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"No mes de julho 30% de desconto em toda area dos pets", null, null, null, null, false, false, false,
 				false, false, false, false, false, false, false, false, false, false, false, true, false, "Rua gilda",
 				"300", "Apto 303", "Rua Flores", "38220834", "Cotia", null);
+
 		PessoaJuridica ju14 = new PessoaJuridica(null, "Cat&Pet", "cat&pet@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"No mes de agosto 30% de desconto em toda area dos pets", null, null, null, null, false, false, false,
@@ -210,6 +217,7 @@ public class DBService {
 				"Temos acomodações para seus animais", null, null, false, false, false, false, false, false, false,
 				false, false, false, false, false, false, true, false, false, "Rua Flores", "300", "Apto 303",
 				"Pompeia", "38220834", "Santo André", null);
+
 		PessoaJuridica ju8 = new PessoaJuridica(null, "	housePet", "house@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null,
 				"Segurança, comodida junto com viagem tranquila", null, null, false, false, false, false, false, false,
@@ -220,6 +228,7 @@ public class DBService {
 				"Viage sem preocupação, temos tudo que seus animais precisa", null, null, false, false, false, false,
 				false, false, false, false, false, false, false, false, false, true, false, false, "Rua dolores", "300",
 				"Apto 303", "Chácaras São Paulo", "38220834", "Taboão da Serra", null);
+
 		PessoaJuridica ju15 = new PessoaJuridica(null, "	Pet", "pet@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null, null, null,
 				"Viage sem preocupação, temos tudo que seus animais precisa, comodida e segurança", null, null, false,
@@ -231,11 +240,13 @@ public class DBService {
 				"Tenho 2 cachorros", null, false, false, false, false, false, false, false, false, false, false, false,
 				false, true, false, false, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Diadema",
 				null);
+
 		PessoaJuridica ju11 = new PessoaJuridica(null, "	debi", "debi@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null, null,
 				"Adoto animais ", null, false, false, false, false, false, false, false, false, false, false, false,
 				false, true, false, false, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Mogi das Cruzes", null);
+
 		PessoaJuridica ju12 = new PessoaJuridica(null, "	cats", "cats@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null, null,
 				"Tenhos 4 gatos, quero mais um", null, false, false, false, false, false, false, false, false, false,
