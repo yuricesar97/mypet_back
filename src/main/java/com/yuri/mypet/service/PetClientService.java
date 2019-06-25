@@ -13,64 +13,64 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.yuri.mypet.domain.PessoaFisica;
+import com.yuri.mypet.domain.PetClient;
 import com.yuri.mypet.domain.enums.TipoCliente;
-import com.yuri.mypet.dto.PessoaFisicaDTO;
-import com.yuri.mypet.dto.PessoaFisicaNewDTO;
+import com.yuri.mypet.dto.PetClientDTO;
+import com.yuri.mypet.dto.PetClientNewDTO;
 import com.yuri.mypet.repositories.EnderecoFisicoRepository;
-import com.yuri.mypet.repositories.PessoaFisicaRepository;
+import com.yuri.mypet.repositories.PetClientRepository;
 import com.yuri.mypet.service.exceptions.DataInternalException;
 import com.yuri.mypet.service.exceptions.ObjectNotFoundException;
 
 @Service
-public class PessoaFisicaService {
+public class PetClientService {
 
 	@Autowired
-	PessoaFisicaRepository repo;
+	PetClientRepository petClientRepository;
 	@Autowired
 	EnderecoFisicoRepository enderecoRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public PessoaFisica find(Integer id) {
+	public PetClient find(Integer id) {
 
-		Optional<PessoaFisica> op = repo.findById(id);
+		Optional<PetClient> op = petClientRepository.findById(id);
 
 		return op.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! id: " + id + ", tipo: " + PessoaFisica.class.getName()));
+				"Objeto não encontrado! id: " + id + ", tipo: " + PetClient.class.getName()));
 	}
 
 	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma
 					// tra)
-	public PessoaFisica insert(PessoaFisica obj) {
+	public PetClient insert(PetClient obj) {
 		obj.setId(null);
-		obj = repo.save(obj); // salva cliente
+		obj = petClientRepository.save(obj); // salva cliente
 		// enderecoRepository.saveAll(obj.getEndereço()); // salva endereço
 		return obj;
 	}
 
-	public PessoaFisica update(PessoaFisica obj) {
-		PessoaFisica newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
+	public PetClient update(PetClient obj) {
+		PetClient newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
 		updateData(newObj, obj); // atulaiza os dados como o obj que foi enviado na requisição
-		return repo.save(newObj); // save vale quanto para inserir quanto para update unica coisa que ele olha é
+		return petClientRepository.save(newObj); // save vale quanto para inserir quanto para update unica coisa que ele olha é
 									// se o Id esta nulo ele insere se não atualiza
 	}
 
 	public void delete(Integer id) {
 		find(id);
 		try {
-			repo.deleteById(id);
+			petClientRepository.deleteById(id);
 
 		} catch (DataIntegrityViolationException e) {
 			throw new DataInternalException("Não é possivel exclui porque há pedidos relacionadas");
 		}
 	}
 
-	public List<PessoaFisica> findAll() {
-		return repo.findAll();
+	public List<PetClient> findAll() {
+		return petClientRepository.findAll();
 	}
 
-	public Page<PessoaFisica> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page
+	public Page<PetClient> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page
 																												// vai
 																												// encapsular
 																												// informações
@@ -94,13 +94,13 @@ public class PessoaFisicaService {
 																												// pagina
 																												// de
 																												// dados
-		return repo.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
+		return petClientRepository.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
 	}
 
-	public PessoaFisica fromDto(PessoaFisicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um
+	public PetClient fromDto(PetClientDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um
 															// DTO
 
-		return new PessoaFisica(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(), null,
+		return new PetClient(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(), null,
 				null, null, null, null, false, objDto.getDataNascimento(), null, null, null, null, null, null, null); // nulo
 																														// porque
 																														// não
@@ -111,10 +111,10 @@ public class PessoaFisicaService {
 		// senha, fotoPerfil, descricao, petWalker, dataNascimento)
 	}
 
-	public PessoaFisica fromDto(PessoaFisicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de
+	public PetClient fromDto(PetClientNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de
 																// um DTO
 
-		PessoaFisica cli1 = new PessoaFisica(null, objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
+		PetClient cli1 = new PetClient(null, objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
 				objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),
 				bCryptPasswordEncoder.encode(objDto.getSenha()), null, objDto.getDescricao(), false,
 				objDto.getDataNascimento(), objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
@@ -136,7 +136,7 @@ public class PessoaFisicaService {
 		return cli1;
 	}
 
-	private void updateData(PessoaFisica newObj, PessoaFisica obj) { // metado aux para atualizar os campos do cliente,
+	private void updateData(PetClient newObj, PetClient obj) { // metado aux para atualizar os campos do cliente,
 																		// pegando o
 		// novo e colocando no antigo
 		newObj.setUsername(obj.getUsername());

@@ -35,7 +35,7 @@ public class PedidoService {
 	@Autowired
 	private produtoRepository produtoRepository;
 	@Autowired
-	private PessoaFisicaService clienteService;
+	private PetClientService petClientService;
 	
 	@Autowired
 	private ProdutoService produtoService;
@@ -56,7 +56,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
-		obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		obj.setCliente(petClientService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if(obj.getPagamento() instanceof PagamentoComBoleto) { // se o meu pagamento for do tipo pagamento com boleto gera uma data para ele

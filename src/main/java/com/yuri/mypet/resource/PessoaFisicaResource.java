@@ -18,31 +18,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.yuri.mypet.domain.PessoaFisica;
-import com.yuri.mypet.dto.PessoaFisicaDTO;
-import com.yuri.mypet.dto.PessoaFisicaNewDTO;
-import com.yuri.mypet.service.PessoaFisicaService;
+import com.yuri.mypet.domain.PetClient;
+
+import com.yuri.mypet.dto.PetClientDTO;
+import com.yuri.mypet.dto.PetClientNewDTO;
+import com.yuri.mypet.service.PetClientService;
 
 @RestController
 @RequestMapping(value = "/pessoafisica")
 public class PessoaFisicaResource {
 
 	@Autowired
-	private PessoaFisicaService service;
+	private PetClientService service;
 
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET) // para bater em um end pont com id
-	public ResponseEntity<PessoaFisica> buscar(@PathVariable Integer id) {
-		PessoaFisica obj = service.find(id);
+	public ResponseEntity<PetClient> buscar(@PathVariable Integer id) {
+		PetClient obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaFisicaNewDTO objDto) { // requestBody faz o json ser
+	public ResponseEntity<Void> insert(@Valid @RequestBody PetClientNewDTO objDto) { // requestBody faz o json ser
 																						// convertido para obj// java
 																						// automaticamente
-		PessoaFisica obj = service.fromDto(objDto);// coverto Dto para objeto entidade
+		PetClient obj = service.fromDto(objDto);// coverto Dto para objeto entidade
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -51,13 +52,13 @@ public class PessoaFisicaResource {
 
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PessoaFisicaDTO objDto, @PathVariable Integer id) {// receber
+	public ResponseEntity<Void> update(@Valid @RequestBody PetClientDTO objDto, @PathVariable Integer id) {// receber
 																												// o
 																												// obejto
 																												// json
 																												// e
 		// tambem o parametro da
-		PessoaFisica obj = service.fromDto(objDto); // URL
+		PetClient obj = service.fromDto(objDto); // URL
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -75,10 +76,10 @@ public class PessoaFisicaResource {
 	@CrossOrigin
 	// @PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PessoaFisicaDTO>> findAll() {
+	public ResponseEntity<List<PetClientDTO>> findAll() {
 
-		List<PessoaFisica> list = service.findAll();
-		List<PessoaFisicaDTO> listDto = list.stream().map(obj -> new PessoaFisicaDTO(obj)).collect(Collectors.toList()); // stream
+		List<PetClient> list = service.findAll();
+		List<PetClientDTO> listDto = list.stream().map(obj -> new PetClientDTO(obj)).collect(Collectors.toList()); // stream
 																															// percorre
 																															// a
 																															// lista,
@@ -98,14 +99,14 @@ public class PessoaFisicaResource {
 	@CrossOrigin
 	// @PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET) // paginação
-	public ResponseEntity<Page<PessoaFisicaDTO>> findPage(
+	public ResponseEntity<Page<PetClientDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
-		Page<PessoaFisica> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<PessoaFisicaDTO> listDto = list.map(obj -> new PessoaFisicaDTO(obj)); // stream percorre a lista, map
+		Page<PetClient> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<PetClientDTO> listDto = list.map(obj -> new PetClientDTO(obj)); // stream percorre a lista, map
 																					// realiza uma operação para cada
 																					// elemento da lista
 		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento

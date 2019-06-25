@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-import com.yuri.mypet.domain.PessoaFisica;
+
 import com.yuri.mypet.domain.PessoaJuridica;
-import com.yuri.mypet.repositories.PessoaFisicaRepository;
+
 import com.yuri.mypet.repositories.PessoaJuridicaRepository;
 import com.yuri.mypet.security.UserSS;
 

@@ -38,7 +38,7 @@ public class Pedido {
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
-	private PessoaFisica cliente;
+	private PetClient cliente;
 	
 	@ManyToOne
 	@JoinColumn(name = "endereço_de_entrega_id")
@@ -51,7 +51,7 @@ public class Pedido {
 		
 	}
 
-	public Pedido(Integer id, Date instante, PessoaFisica cliente, EnderecoFisico endereco) {
+	public Pedido(Integer id, Date instante, PetClient cliente, EnderecoFisico endereco) {
 		super();
 		this.id = id;
 		this.instante = instante;
@@ -85,11 +85,11 @@ public class Pedido {
 		this.instante = instante;
 	}
 
-	public PessoaFisica getCliente() {
+	public PetClient getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(PessoaFisica cliente) {
+	public void setCliente(PetClient cliente) {
 		this.cliente = cliente;
 	}
 

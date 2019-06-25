@@ -11,24 +11,24 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.yuri.mypet.domain.PessoaFisica;
-import com.yuri.mypet.dto.PessoaFisicaDTO;
-import com.yuri.mypet.repositories.PessoaFisicaRepository;
+import com.yuri.mypet.domain.PetClient;
+import com.yuri.mypet.dto.PetClientDTO;
+import com.yuri.mypet.repositories.PetClientRepository;
 import com.yuri.mypet.service.exception.FieldMessage;
 
-public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, PessoaFisicaDTO> {
+public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, PetClientDTO> {
 	
 	@Autowired
 	private HttpServletRequest request; //permite pegar o parametro da uri
 	@Autowired
-	private PessoaFisicaRepository repo;
+	private PetClientRepository petClientRepository;
 	
 	
 	@Override
 	public void initialize(ClienteUpdate ann) {
 	}
 
-	public boolean isValid(PessoaFisicaDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(PetClientDTO objDto, ConstraintValidatorContext context) {
 		
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
@@ -38,7 +38,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 		
 		List<FieldMessage> list = new ArrayList<>();
 		
-		PessoaFisica aux = repo.findByEmail(objDto.getEmail());
+		PetClient aux = petClientRepository.findByEmail(objDto.getEmail());
 		if(aux != null && !aux.getId().equals(uriId)) { // verificando se email já existe
 			list.add(new FieldMessage("Email", "Email já existente"));
 		}

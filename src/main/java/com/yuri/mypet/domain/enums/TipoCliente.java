@@ -2,7 +2,7 @@ package com.yuri.mypet.domain.enums;
 
 public enum TipoCliente {
 
-	PESSOAFISICA(1,"Clinte Físico"),
+	PESSOAFISICA(1,"Cliente Físico"),
 	PESSOAJURIDICA(2,"Cliente jurídico");
 	
 	private Integer cod;

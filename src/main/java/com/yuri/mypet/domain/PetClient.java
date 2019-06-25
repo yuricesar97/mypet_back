@@ -22,7 +22,7 @@ import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
 
 @Entity
-public class PessoaFisica implements Serializable {
+public class PetClient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -72,14 +72,14 @@ public class PessoaFisica implements Serializable {
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
 
-	public PessoaFisica() {
+	public PetClient() {
 		addPerfil(Perfil.ADMIN); // ja colocar que é um cliente
 	}
 
-	public PessoaFisica(Integer id, String username, String nomeCompleto, String email, String cpf,
-			TipoCliente tipoPerfil, String senha, String fotoPerfil, String descricao, boolean petWalker,
-			String dataNascimento, String logradouro, String numero, String complemento, String bairro, String cep,
-			String cidade, String estado) {
+	public PetClient(Integer id, String username, String nomeCompleto, String email, String cpf, TipoCliente tipoPerfil,
+			String senha, String fotoPerfil, String descricao, boolean petWalker, String dataNascimento,
+			String logradouro, String numero, String complemento, String bairro, String cep, String cidade,
+			String estado) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -272,7 +272,7 @@ public class PessoaFisica implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PessoaFisica other = (PessoaFisica) obj;
+		PetClient other = (PetClient) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -7,58 +7,66 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.yuri.mypet.service.validation.ClienteInsert;
+import com.yuri.mypet.domain.EnderecoFisico;
+import com.yuri.mypet.domain.PetClient;
+import com.yuri.mypet.service.validation.ClienteUpdate;
 
-@ClienteInsert
-public class PessoaFisicaNewDTO implements Serializable {
-
+@ClienteUpdate
+public class PetClientDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private Integer id;
+
 	private String username;
-
-	@NotEmpty(message = "Preechimento obrigatório")
-	@Email(message = "Email inválido")
-	private String email;
-
+	private String senha;
 	@NotEmpty(message = "Prenchimento obrigatório")
 	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
 	private String nomeCompleto;
 
-	private boolean petWalker = false;
-	private String descricao;
-
 	@NotEmpty(message = "Preechimento obrigatório")
+	@Email(message = "Email inválido")
+	private String email;
 	private String cpf;
-
-	private String DataNascimento;
-
-	private Integer tipoPerfil;
-
-	@NotEmpty(message = "Preechimento obrigatório")
-	private String senha;
-
-	@NotEmpty(message = "Preechimento obrigatório")
+	private String dataNascimento;
+	private EnderecoFisico endereco;
 
 	private String logradouro;
-	@NotEmpty(message = "Preechimento obrigatório")
-
-	@NotEmpty(message = "Preechimento obrigatório")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	private String cep;
 	private String cidade;
 	private String estado;
 
-	@NotEmpty(message = "Preechimento obrigatório")
-	private String cep;
+	private String fotoPerfil;
+	private boolean petWalker = false;
+	private String descricao;
 
-	@NotEmpty(message = "Preechimento obrigatório")
-	private String telefone1;
-	private String telefone2;
-	private String telefone3;
+	public PetClientDTO() {
 
-	public PessoaFisicaNewDTO() {
+	}
 
+	public PetClientDTO(PetClient obj) { // construtor sera respnosavel por instanciar um DTO com os dados que
+												// desejo
+
+		id = obj.getId();
+		username = obj.getUsername();
+		nomeCompleto = obj.getNomeCompleto();
+		email = obj.getEmail();
+		cpf = obj.getCpf();
+		dataNascimento = obj.getDataNascimento();
+		senha = obj.getSenha();
+		logradouro = obj.getLogradouro();
+		numero = obj.getNumero();
+		complemento = obj.getComplemento();
+		bairro = obj.getBairro();
+		cep = obj.getCep();
+		cidade = obj.getCidade();
+		estado = obj.getEstado();
+		fotoPerfil = obj.getFotoPerfil();
+		petWalker = obj.isPetWalker();
+		descricao = obj.getDescricao();
+		dataNascimento = obj.getDataNascimento();
 	}
 
 	public String getCpf() {
@@ -67,6 +75,14 @@ public class PessoaFisicaNewDTO implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -85,12 +101,28 @@ public class PessoaFisicaNewDTO implements Serializable {
 		this.email = email;
 	}
 
-	public Integer getTipoPerfil() {
-		return tipoPerfil;
+	public EnderecoFisico getEndereco() {
+		return endereco;
 	}
 
-	public void setTipoPerfil(Integer tipoPerfil) {
-		this.tipoPerfil = tipoPerfil;
+	public void setEndereco(EnderecoFisico endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getLogradouro() {
@@ -133,46 +165,6 @@ public class PessoaFisicaNewDTO implements Serializable {
 		this.cep = cep;
 	}
 
-	public String getTelefone1() {
-		return telefone1;
-	}
-
-	public void setTelefone1(String telefone1) {
-		this.telefone1 = telefone1;
-	}
-
-	public String getTelefone2() {
-		return telefone2;
-	}
-
-	public void setTelefone2(String telefone2) {
-		this.telefone2 = telefone2;
-	}
-
-	public String getTelefone3() {
-		return telefone3;
-	}
-
-	public void setTelefone3(String telefone3) {
-		this.telefone3 = telefone3;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getDataNascimento() {
-		return DataNascimento;
-	}
-
-	public void setDataNascimento(String dataNascimento) {
-		DataNascimento = dataNascimento;
-	}
-
 	public String getCidade() {
 		return cidade;
 	}
@@ -187,6 +179,14 @@ public class PessoaFisicaNewDTO implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getFotoPerfil() {
+		return fotoPerfil;
+	}
+
+	public void setFotoPerfil(String fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
 
 	public boolean isPetWalker() {
@@ -205,16 +205,10 @@ public class PessoaFisicaNewDTO implements Serializable {
 		this.descricao = descricao;
 	}
 
-	/**
-	 * @return the nomeCompleto
-	 */
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
 
-	/**
-	 * @param nomeCompleto the nomeCompleto to set
-	 */
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
 	}
