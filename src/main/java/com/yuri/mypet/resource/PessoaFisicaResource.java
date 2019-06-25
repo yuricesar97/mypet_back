@@ -1,6 +1,5 @@
 package com.yuri.mypet.resource;
 
-
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,68 +29,87 @@ public class PessoaFisicaResource {
 
 	@Autowired
 	private PessoaFisicaService service;
-	
-	@RequestMapping(value= "/{id}", method=RequestMethod.GET)// para bater em um end pont com id
+
+	@CrossOrigin
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET) // para bater em um end pont com id
 	public ResponseEntity<PessoaFisica> buscar(@PathVariable Integer id) {
 		PessoaFisica obj = service.find(id);
-		return ResponseEntity.ok().body(obj) ;
+		return ResponseEntity.ok().body(obj);
 	}
-		
+
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaFisicaNewDTO objDto) { // requestBody faz o json ser convertido para obj// java automaticamente
-		PessoaFisica obj = service.fromDto(objDto);//coverto Dto para objeto entidade
+	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaFisicaNewDTO objDto) { // requestBody faz o json ser
+																						// convertido para obj// java
+																						// automaticamente
+		PessoaFisica obj = service.fromDto(objDto);// coverto Dto para objeto entidade
 		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				  .path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
-	}	
-	
-	
-	
-	
+	}
+
+	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PessoaFisicaDTO objDto, @PathVariable Integer id) {// receber o obejto json e
-																								// tambem o parametro da
-		PessoaFisica obj = service.fromDto(objDto);																						// URL
+	public ResponseEntity<Void> update(@Valid @RequestBody PessoaFisicaDTO objDto, @PathVariable Integer id) {// receber
+																												// o
+																												// obejto
+																												// json
+																												// e
+		// tambem o parametro da
+		PessoaFisica obj = service.fromDto(objDto); // URL
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@CrossOrigin
+	// @PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // para bater em um end pont com id
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 
 	}
-	
-	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping( method = RequestMethod.GET) 
+
+	@CrossOrigin
+	// @PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PessoaFisicaDTO>> findAll() {
 
 		List<PessoaFisica> list = service.findAll();
-		List<PessoaFisicaDTO> listDto = list.stream().map(obj -> new PessoaFisicaDTO(obj)).collect(Collectors.toList());  //stream percorre a lista, map realiza uma operação para cada elemento da lista
-		return ResponseEntity.ok().body(listDto);										                               //obj função anonima que recebece uma obj com argumento 
-																												  // collector realiza a transformação para lista novamente
+		List<PessoaFisicaDTO> listDto = list.stream().map(obj -> new PessoaFisicaDTO(obj)).collect(Collectors.toList()); // stream
+																															// percorre
+																															// a
+																															// lista,
+																															// map
+																															// realiza
+																															// uma
+																															// operação
+																															// para
+																															// cada
+																															// elemento
+																															// da
+																															// lista
+		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
+		// collector realiza a transformação para lista novamente
 	}
-	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/page", method = RequestMethod.GET) //paginação
+
+	@CrossOrigin
+	// @PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/page", method = RequestMethod.GET) // paginação
 	public ResponseEntity<Page<PessoaFisicaDTO>> findPage(
-			@RequestParam (value = "page", defaultValue="0")Integer page,
-			@RequestParam (value = "linesPerPage", defaultValue="24")Integer  linesPerPage,
-			@RequestParam (value = "orderBy", defaultValue="nome")String orderBy, 
-			@RequestParam (value = "direction", defaultValue="ASC")String direction) {
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
 		Page<PessoaFisica> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<PessoaFisicaDTO> listDto = list.map(obj -> new PessoaFisicaDTO(obj));  //stream percorre a lista, map realiza uma operação para cada elemento da lista
-		return ResponseEntity.ok().body(listDto);										                               //obj função anonima que recebece uma obj com argumento 
-																												  // collector realiza a transformação para lista novamente
+		Page<PessoaFisicaDTO> listDto = list.map(obj -> new PessoaFisicaDTO(obj)); // stream percorre a lista, map
+																					// realiza uma operação para cada
+																					// elemento da lista
+		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
+		// collector realiza a transformação para lista novamente
 	}
-		
-	}
-	
 
+}
