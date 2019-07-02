@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.yuri.mypet.domain.enums.EstadoPagamento;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)// para mapear instacias no banco de dados

@@ -1,4 +1,4 @@
-package com.yuri.mypet.domain.enums;
+package com.yuri.mypet.domain;
 
 public enum EstadoPagamento {
 

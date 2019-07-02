@@ -19,7 +19,7 @@ import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
 
 @Entity
-public class PessoaJuridica implements Serializable {
+public class PetProvider implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,7 +30,7 @@ public class PessoaJuridica implements Serializable {
 
 	@Column(unique = true) // faz o banco de dados garantir que não vai ter repetição com esse campo
 	private String email;
-	private String cnpj;
+	private String cpfOuCnpj;
 	private Integer tipoPerfil;
 
 	@JsonIgnore // para não aparecer no json
@@ -45,10 +45,8 @@ public class PessoaJuridica implements Serializable {
 	private String estado;
 
 	private String fotoPerfil;
-	private String descricaoPetShop;
-	private String descricaoPetVet;
+	private String descricao;
 	private String descricaoPetHome;
-	private String descricaoPetClient;
 	private String situacaoAprovacao;
 
 	private boolean checkStatus = false;
@@ -81,20 +79,20 @@ public class PessoaJuridica implements Serializable {
 	@JsonIgnore // pedidos do clinete não sera serealizados.
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE_JURIDICO") // razaoSocial da tabela
+	@CollectionTable(name = "TELEFONE_PETPROVIDER") // razaoSocial da tabela
 	private Set<String> telefones = new HashSet<>();// permite não repetir valores(represanta os conjuntos de valores )
 
 	@ElementCollection(fetch = FetchType.EAGER) // traz o perfil junto
 	@CollectionTable(name = "PERFIS_JURIDICO")
 	private Set<Integer> perfis = new HashSet<>();
 
-	public PessoaJuridica() {
+	public PetProvider() {
 		addPerfil(Perfil.SERVICO); // ja colocar que é um cliente
 	}
 
-	public PessoaJuridica(Integer id, String razaoSocial, String email, String cnpj, TipoCliente tipoPerfil, String senha,
-			String fotoPerfil, String descricaoPetShop, String descricaoPetVet, String descricaoPetHome,
-			String descricaoPetClient,String situacaoAprovacao, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
+	public PetProvider(Integer id, String razaoSocial, String email, String cpfOuCnpj, TipoCliente tipoPerfil, String senha,
+			String fotoPerfil, String descricao, String descricaoPetHome,
+			String situacaoAprovacao, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
 			boolean consulta, boolean exames, boolean apartamento, boolean casa, boolean fumante, boolean telado,
 			boolean petVet, boolean petClient, boolean petHome, boolean petShop,boolean checkStatus, String logradouro, String numero,
 			String complemento, String bairro, String cep, String cidade, String estado) {
@@ -102,7 +100,7 @@ public class PessoaJuridica implements Serializable {
 		this.id = id;
 		this.razaoSocial = razaoSocial;
 		this.email = email;
-		this.cnpj = cnpj;
+		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
 		;
 		this.senha = senha;
@@ -130,10 +128,8 @@ public class PessoaJuridica implements Serializable {
 		this.petClient = petClient;
 		this.petHome = petHome;
 		this.petShop = petShop;
-		this.descricaoPetClient = descricaoPetClient;
 		this.descricaoPetHome = descricaoPetHome;
-		this.descricaoPetShop = descricaoPetShop;
-		this.descricaoPetVet = descricaoPetVet;
+		this.descricao = descricao;
 		this.situacaoAprovacao = situacaoAprovacao;
 
 		addPerfil(Perfil.SERVICO);
@@ -259,12 +255,12 @@ public class PessoaJuridica implements Serializable {
 		this.razaoSocial = razaoSocial;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public boolean isFarmacia() {
@@ -387,21 +383,14 @@ public class PessoaJuridica implements Serializable {
 		this.petShop = petShop;
 	}
 
-	public String getDescricaoPetShop() {
-		return descricaoPetShop;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricaoPetShop(String descricaoPetShop) {
-		this.descricaoPetShop = descricaoPetShop;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getDescricaoPetVet() {
-		return descricaoPetVet;
-	}
-
-	public void setDescricaoPetVet(String descricaoPetVet) {
-		this.descricaoPetVet = descricaoPetVet;
-	}
 
 	public String getDescricaoPetHome() {
 		return descricaoPetHome;
@@ -411,13 +400,6 @@ public class PessoaJuridica implements Serializable {
 		this.descricaoPetHome = descricaoPetHome;
 	}
 
-	public String getDescricaoPetClient() {
-		return descricaoPetClient;
-	}
-
-	public void setDescricaoPetClient(String descricaoPetClient) {
-		this.descricaoPetClient = descricaoPetClient;
-	}
 
 	@Override
 	public int hashCode() {
@@ -435,7 +417,7 @@ public class PessoaJuridica implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PessoaJuridica other = (PessoaJuridica) obj;
+			PetProvider other = (PetProvider) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

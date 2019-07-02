@@ -101,7 +101,7 @@ public class PetClientService {
 															// DTO
 
 		return new PetClient(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(), null,
-				null, null, null, null, false, objDto.getDataNascimento(), null, null, null, null, null, null, null); // nulo
+				null, null, null, null,  objDto.getDataNascimento(), null, null, null, null, null, null, null); // nulo
 																														// porque
 																														// não
 																														// temos
@@ -116,7 +116,7 @@ public class PetClientService {
 
 		PetClient cli1 = new PetClient(null, objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
 				objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),
-				bCryptPasswordEncoder.encode(objDto.getSenha()), null, objDto.getDescricao(), false,
+				bCryptPasswordEncoder.encode(objDto.getSenha()), null, objDto.getDescricao(),
 				objDto.getDataNascimento(), objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
 				objDto.getBairro(), objDto.getCep(), objDto.getCidade(), objDto.getEstado());
 

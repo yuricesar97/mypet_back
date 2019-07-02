@@ -3,7 +3,7 @@ package com.yuri.mypet.domain;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.yuri.mypet.domain.enums.EstadoPagamento;
+
 
 @Entity
 @JsonTypeName("pagamentoComCartao")

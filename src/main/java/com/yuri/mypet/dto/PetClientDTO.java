@@ -64,7 +64,6 @@ public class PetClientDTO implements Serializable {
 		cidade = obj.getCidade();
 		estado = obj.getEstado();
 		fotoPerfil = obj.getFotoPerfil();
-		petWalker = obj.isPetWalker();
 		descricao = obj.getDescricao();
 		dataNascimento = obj.getDataNascimento();
 	}

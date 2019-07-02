@@ -49,7 +49,6 @@ public class PetClient implements Serializable {
 	private String estado;
 
 	private String fotoPerfil;
-	private boolean petWalker = false;
 	private String descricao;
 	private String dataNascimento;
 
@@ -65,19 +64,19 @@ public class PetClient implements Serializable {
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE") // username da tabela
+	@CollectionTable(name = "TELEFONE_PETCLIENT") // username da tabela
 	private Set<String> telefones = new HashSet<>();// permite não repetir valores(represanta os conjuntos de valores )
 
 	@ElementCollection(fetch = FetchType.EAGER) // traz o perfil junto
-	@CollectionTable(name = "PERFIS")
+	@CollectionTable(name = "PERFIS_PETCLIENT")
 	private Set<Integer> perfis = new HashSet<>();
 
 	public PetClient() {
-		addPerfil(Perfil.ADMIN); // ja colocar que é um cliente
+		addPerfil(Perfil.CLIENTE); // ja colocar que é um cliente
 	}
 
 	public PetClient(Integer id, String username, String nomeCompleto, String email, String cpf, TipoCliente tipoPerfil,
-			String senha, String fotoPerfil, String descricao, boolean petWalker, String dataNascimento,
+			String senha, String fotoPerfil, String descricao, String dataNascimento,
 			String logradouro, String numero, String complemento, String bairro, String cep, String cidade,
 			String estado) {
 		super();
@@ -97,11 +96,10 @@ public class PetClient implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.fotoPerfil = fotoPerfil;
-		this.petWalker = petWalker;
 		this.descricao = descricao;
 		this.dataNascimento = dataNascimento;
 		this.nomeCompleto = nomeCompleto;
-		addPerfil(Perfil.ADMIN);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -281,13 +279,8 @@ public class PetClient implements Serializable {
 		return true;
 	}
 
-	public boolean isPetWalker() {
-		return petWalker;
-	}
 
-	public void setPetWalker(boolean petWalker) {
-		petWalker = petWalker;
-	}
+
 
 	/**
 	 * @return the nomeCompleto

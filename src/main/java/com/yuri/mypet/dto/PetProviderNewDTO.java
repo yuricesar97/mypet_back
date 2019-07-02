@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import com.yuri.mypet.service.validation.JuridicoInsert;
 
 @JuridicoInsert
-public class PessoaJuridicaNewDTO implements Serializable {
+public class PetProviderNewDTO implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	
 	
 	@NotEmpty(message = "Preechimento obrigatório")
-	private String cnpj;
+	private String cpfOuCnpj;
 	
 	
 	private Integer tipoPerfil;
@@ -50,10 +50,8 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	private String cidade;
 	private String estado;
 	
-	private String descricaoPetShop;
-	private String descricaoPetVet;
+	private String descricao;
 	private String descricaoPetHome;
-	private String descricaoPetClient;
 	private String situacaoAprovacao;
 	
 	private boolean checkStatus = false;
@@ -87,17 +85,17 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	
 	
 	
-	public PessoaJuridicaNewDTO() {
+	public PetProviderNewDTO() {
 		
 	}
 	
-	public String getCnpj() {
-		return cnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public String getRazaoSocial() {
@@ -194,25 +192,16 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	public String getTelefone2() {
 		return telefone2;
 	}
-
-
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
-
-
 	public String getTelefone3() {
 		return telefone3;
 	}
 
-
 	public void setTelefone3(String telefone3) {
 		this.telefone3 = telefone3;
 	}
-
-
-
-
 	public String getSenha() {
 		return senha;
 	}
@@ -220,26 +209,14 @@ public class PessoaJuridicaNewDTO implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	
-	
-
-
-	public String getDescricaoPetShop() {
-		return descricaoPetShop;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricaoPetShop(String descricaoPetShop) {
-		this.descricaoPetShop = descricaoPetShop;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getDescricaoPetVet() {
-		return descricaoPetVet;
-	}
-
-	public void setDescricaoPetVet(String descricaoPetVet) {
-		this.descricaoPetVet = descricaoPetVet;
-	}
 
 	public String getDescricaoPetHome() {
 		return descricaoPetHome;
@@ -247,14 +224,6 @@ public class PessoaJuridicaNewDTO implements Serializable {
 
 	public void setDescricaoPetHome(String descricaoPetHome) {
 		this.descricaoPetHome = descricaoPetHome;
-	}
-
-	public String getDescricaoPetClient() {
-		return descricaoPetClient;
-	}
-
-	public void setDescricaoPetClient(String descricaoPetClient) {
-		this.descricaoPetClient = descricaoPetClient;
 	}
 
 	public String getCidade() {

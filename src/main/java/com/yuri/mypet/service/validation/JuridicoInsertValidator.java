@@ -8,17 +8,17 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.yuri.mypet.domain.PessoaJuridica;
+import com.yuri.mypet.domain.PetProvider;
 import com.yuri.mypet.domain.enums.TipoCliente;
-import com.yuri.mypet.dto.PessoaJuridicaNewDTO;
-import com.yuri.mypet.repositories.PessoaJuridicaRepository;
+import com.yuri.mypet.dto.PetProviderNewDTO;
+import com.yuri.mypet.repositories.PetProviderRepository;
 import com.yuri.mypet.service.exception.FieldMessage;
 import com.yuri.mypet.service.validation.utils.BR;
 
-public class JuridicoInsertValidator implements ConstraintValidator<JuridicoInsert, PessoaJuridicaNewDTO> {
+public class JuridicoInsertValidator implements ConstraintValidator<JuridicoInsert, PetProviderNewDTO> {
 	
 	@Autowired
-	PessoaJuridicaRepository repo;
+	PetProviderRepository petProviderRepository;
 	
 	
 	@Override
@@ -26,16 +26,16 @@ public class JuridicoInsertValidator implements ConstraintValidator<JuridicoInse
 	}
 
 	@Override
-	public boolean isValid(PessoaJuridicaNewDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(PetProviderNewDTO objDto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
 
-		if (objDto.getTipoPerfil().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCnpj())) {
-			list.add(new FieldMessage("cnpj", "CNPJ invalido"));
+		if (objDto.getTipoPerfil().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("CpfOuCnpj", "CpfOuCnpj invalido"));
 		}
 		
 		
-		PessoaJuridica aux = repo.findByEmail(objDto.getEmail());
+		PetProvider aux = petProviderRepository.findByEmail(objDto.getEmail());
 		if(aux != null) { // verificando se email já existe
 			list.add(new FieldMessage("Email", "Email já existente"));
 		}

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.yuri.mypet.domain.Categoria;
 
-import com.yuri.mypet.domain.PessoaJuridica;
 import com.yuri.mypet.domain.PetClient;
+import com.yuri.mypet.domain.PetProvider;
 import com.yuri.mypet.domain.Produto;
 import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
@@ -21,8 +21,9 @@ import com.yuri.mypet.repositories.ItemPedidoRepository;
 import com.yuri.mypet.repositories.PagamentoRepository;
 import com.yuri.mypet.repositories.PedidoRepository;
 
-import com.yuri.mypet.repositories.PessoaJuridicaRepository;
+
 import com.yuri.mypet.repositories.PetClientRepository;
+import com.yuri.mypet.repositories.PetProviderRepository;
 import com.yuri.mypet.repositories.produtoRepository;
 
 @Service // componente so spring pode ser injetado em outros lugares com o @Autowarid
@@ -41,7 +42,7 @@ public class DBService {
 	private EnderecoJuridicoRepository enderecoJuridicoRepository;
 
 	@Autowired
-	private PessoaJuridicaRepository pessoaJuridicaRepository;
+	private PetProviderRepository petProviderRepository;
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -123,32 +124,33 @@ public class DBService {
 				produto8, produto9, produto10, produto11));
 
 				PetClient cli1 = new PetClient(null, "maria_silva", "Maria Silva", "yuricesar97@gmail.com", "36378912377",
-				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false, "21/04/1997",
+				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, "21/04/1997",
 				"Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Santos", null);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli2 = new PetClient(null, "antonio_nunes", "Antonio Nunes", "antonio@gmail.com", "36378912377",
-				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false, "21/04/1997",
+				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, "21/04/1997",
 				"Rua Flores", "300", "Apto 303", "Chácaras São Paulo", "38220834", "Franca", null);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "938393"));
-
+			cli2.addPerfil(Perfil.ADMIN);
+			
 		PetClient cli3 = new PetClient(null, "juliana_aparecida", "Juliana Aparecida", "juliana@gmail.com",
-				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false,
+				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, 
 				"21/04/1997", "Rua Flores", "300", "Apto 303", "Colônia", "38220834", "Jundiaí", null);
 		cli3.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli4 = new PetClient(null, "fabiola_marcondes", "Fabiola Marcondes", "fabiola@gmail.com",
-				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false,
+				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, 
 				"21/04/1997", "Rua Flores", "300", "Apto 303", "Centro", "38220834", "Campinas", null);
 		cli4.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli5 = new PetClient(null, "marina_david", "Marina David", "marina@gmail.com", "36378912377",
-				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, false, "21/04/1997",
+				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null,  "21/04/1997",
 				"Rua Flores", "300", "Apto 303", "Bela vista", "38220834", "Bauru", null);
 		cli5.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli6 = new PetClient(null, "ana_costa", "Ana Costa", "ana@gmail.com", "36378912377",
-				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, false, null,
+				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null,
 				"Avenida Matos", "105", "Sala 800", "Alegre", "38777012", "Holambra", null);
 		cli6.addPerfil(Perfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("23363323", "938388893"));
@@ -167,113 +169,114 @@ public class DBService {
 		petClientRepository.saveAll(Arrays.asList(cli1, cli2, cli3, cli4, cli5, cli6));
 		// enderecoRepositoty.saveAll(Arrays.asList(e1,e2,e3));
 
-		PessoaJuridica ju1 = new PessoaJuridica(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
+		PetProvider ju1 = new PetProvider(null, "Mydog", "dog@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Busca facilitar a vida dos tutores, oferecendo ração, veterinário, banho & tosa e acessórios em um só lugar.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				true, false, false, false, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Dom Pedro",
 				"Maranhão (MA)");
+				ju1.addPerfil(Perfil.ADMIN);
 
-		PessoaJuridica ju2 = new PessoaJuridica(null, "PersonalPet", "personal@gmail.com", "123456",
+				PetProvider ju2 = new PetProvider(null, "PersonalPet", "personal@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Personal Pet  surgiu do nosso amor , paixão aos animais e o pensamento de melhorar a qualidade de vida dos cães , bem estar da família e sociedade",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				  null, null, false, false, false, false, false, false, false, false, false, false, false,
 				true, false, false, false, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Abreu e Lima", "Pernambuco (PE)");
 
-		PessoaJuridica ju3 = new PessoaJuridica(null, "Carloss", "p@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
+				PetProvider ju3 = new PetProvider(null, "Carloss", "p@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null,
-				"Sou o Carlos, tenho 54 anos e sou cuidador e passeador de cachorros e gatos!", null, null, null, null,
+				"Sou o Carlos, tenho 54 anos e sou cuidador e passeador de cachorros e gatos!", null, null,
 				false, false, false, false, false, false, false, false, false, false, false, true, false, false, false,
 				false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834", "Agua Preta",
 				"Pernambuco (PE)");
 
-		PessoaJuridica ju13 = new PessoaJuridica(null, "Homeopet", "homeopet@gmail.com", "123456",
+				PetProvider ju13 = new PetProvider(null, "Homeopet", "homeopet@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Com décadas de experiência, a Homeo Pet possui uma completa linha de homeopatia veterinária para cuidar da saúde do seu bichinho evitando medicações alopáticas e ampliando o bem-estar.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, true,
+				 null, null, false, false, false, false, false, false, false, false, false, false, true,
 				false, false, false, false, false, "Rua gilda", "300", "Apto 303", "Rua Flores", "38220834", "Altinho",
 				"Pernambuco (PE)");
 
-		PessoaJuridica ju4 = new PessoaJuridica(null, "Petz", "petz@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
+				PetProvider ju4 = new PetProvider(null, "Petz", "petz@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Cada dia mais moderna e equipada nossa clínica veterinária oferece: exames, tratamentos, cirurgias e serviços diferenciados.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Marília",
 				"São Paulo (SP)");
 
-		PessoaJuridica ju5 = new PessoaJuridica(null, "	ClubPet", "club@gmail.com", "123456",
+				PetProvider ju5 = new PetProvider(null, "	ClubPet", "club@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"O banho e tosa foi construído para que o seu Pet esteja em um ambiente confortável,   com cuidados e carinho",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"campinas", "São Paulo (SP)");
 
-		PessoaJuridica ju6 = new PessoaJuridica(null, "CaninPet", "canin@gmail.com", "123456",
+				PetProvider ju6 = new PetProvider(null, "CaninPet", "canin@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Encontre os produtos certos para seu bichinho de estimação: rações, brinquedos, acessórios e muitos outros itens para ele.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua gilda", "300", "Apto 303", "Rua Flores", "38220834", "Sapucaia",
 				"Rio de Janeiro (RJ)");
 
-		PessoaJuridica ju14 = new PessoaJuridica(null, "HotelPet", "hotel@pet@gmail.com", "123456",
+				PetProvider ju14 = new PetProvider(null, "HotelPet", "hotel@pet@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"O hotelzinho que seu cachorro merece é um lar: com um herói que cuida com amor e mantém a rotina dele como em casa",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua gilda", "300", "Apto 303", "Rua Flores", "38220834",
 				"Barro Preto", "Bahia (BA)");
 
-		PessoaJuridica ju7 = new PessoaJuridica(null, "	LarTemporario", "lartemp@gmail.com", "123456",
+				PetProvider ju7 = new PetProvider(null, "	LarTemporario", "lartemp@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Oferecemos nosso espaço até que eles sejam doados por um preço bem mais em conta do que um cão/gato que esteja hospedado em nosso hotel.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, true, false, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Bonito",
 				"Bahia (BA)");
 
-		PessoaJuridica ju8 = new PessoaJuridica(null, "LarPermanente", "larper@gmail.com", "123456",
+				PetProvider ju8 = new PetProvider(null, "LarPermanente", "larper@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Esse tipo de hospedagem nada mais é do que a guarda compartilhada do seu animalzinho com um preço bem mais em conta do que uma hospedagem normal de um animal de férias no hotel.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, true, false, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Alfenas", "Minas Gerais (MG)");
 
-		PessoaJuridica ju9 = new PessoaJuridica(null, "	plusPet", "plus@gmail.com", "123456",
+				PetProvider ju9 = new PetProvider(null, "	plusPet", "plus@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
-				"No mes de julho 30% de desconto em toda area dos pets", null, null, null, null, false, false, false,
+				"No mes de julho 30% de desconto em toda area dos pets", null, null, false, false, false,
 				false, false, false, false, false, false, false, false, false, false, true, false, false, "Rua dolores",
 				"300", "Apto 303", "Chácaras São Paulo", "38220834", "Abre Campo", "Minas Gerais (MG)");
 
-		PessoaJuridica ju15 = new PessoaJuridica(null, "PetPlus", "pett@gmail.com", "123456",
+				PetProvider ju15 = new PetProvider(null, "PetPlus", "pett@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Assim como é natural que as crianças tenham acompanhamento pediátrico, os pets também precisam de um médico de confiança. As visitas ao médico veterinário devem ser parte da rotina de saúde do pet.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, false, false, true, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Mangaratiba", "Rio de Janeiro (RJ)");
 
-		PessoaJuridica ju10 = new PessoaJuridica(null, "juli", "juli@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
+				PetProvider ju10 = new PetProvider(null, "juli", "juli@gmail.com", "123456", TipoCliente.PESSOAJURIDICA,
 				bCryptPasswordEncoderEncoder.encode("321"), null,
 				"O passeio é uma das atividades mais importantes na vida de qualquer cachorro. Além de propiciar uma melhora em sua saúde e bem estar, o passeio é uma forma do cachorro manter sua mente em atividade.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, true, false, false, false, "Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Niteroi",
 				"Rio de Janeiro (RJ)");
 
-		PessoaJuridica ju11 = new PessoaJuridica(null, "DomicilioVet", "domiciovet@gmail.com", "123456",
+				PetProvider ju11 = new PetProvider(null, "DomicilioVet", "domiciovet@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Os cuidados com os animais devem ser constantes, e quem tem um amigo de quatro patas sabe o quão importante são as visitas ao veterinário e a manutenção da saúde dos pets. Com isso em foco, o mercado super aquecido dos cachorros e gatos.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, false,
+				 null, null, false, false, false, false, false, false, false, false, false, false, false,
 				false, true, false, false, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Mogi das Cruzes", "São Paulo (SP)");
 
-		PessoaJuridica ju12 = new PessoaJuridica(null, "Health", "health@gmail.com", "123456",
+				PetProvider ju12 = new PetProvider(null, "Health", "health@gmail.com", "123456",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("321"), null,
 				"Os bichinhos de estimação já são parte da família, né? Tem quem use apelidos carinhosos para falar com eles, quem chame de filho ou filha... é muito amor envolvido! E, como diz a música, quem ama cuida! É aqui que entra a Health for Pet.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, true,
+				 null, null, false, false, false, false, false, false, false, false, false, false, true,
 				false, false, false, false, false, "Rua dolores", "300", "Apto 303", "Chácaras São Paulo", "38220834",
 				"Osasco", "São Paulo (SP)");
-		PessoaJuridica forneAdmin = new PessoaJuridica(null, "Cobasi", "admin@admin.com", "60177020000164",
+				PetProvider forneAdmin = new PetProvider(null, "Cobasi", "admin@admin.com", "60177020000164",
 				TipoCliente.PESSOAJURIDICA, bCryptPasswordEncoderEncoder.encode("123"), null,
 				"Loja referência no mercado dos Petshops. Inaugurada em 14 de outubro de 1985, a Cobasi é consierado um shopping dos animais domésticos.",
-				null, null, null, null, false, false, false, false, false, false, false, false, false, false, true,
+				 null, null, false, false, false, false, false, false, false, false, false, false, true,
 				false, false, false, false, false, "Rua Álvaro Alves Fussi", "10", "Small mall",
 				"Jardim Botânico (Sousas)", "13106252", "Campinas", "SP");
 
@@ -287,7 +290,7 @@ public class DBService {
 		// EnderecoJuridico end1 = new EnderecoJuridico(null, "Rua Flores", "300", "Apto
 		// 303", "Jardim", "38220834", "Arraras",null, ju );
 
-		pessoaJuridicaRepository.saveAll(Arrays.asList(ju1, ju2, ju3, ju4, ju13, ju5, ju6, ju7, ju8, ju9, ju10, ju11,
+		petProviderRepository.saveAll(Arrays.asList(ju1, ju2, ju3, ju4, ju13, ju5, ju6, ju7, ju8, ju9, ju10, ju11,
 				ju12, ju14, ju15, forneAdmin));
 		/**
 		 * 

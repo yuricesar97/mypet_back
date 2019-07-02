@@ -9,10 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yuri.mypet.domain.EstadoPagamento;
 import com.yuri.mypet.domain.ItemPedido;
 import com.yuri.mypet.domain.PagamentoComBoleto;
 import com.yuri.mypet.domain.Pedido;
-import com.yuri.mypet.domain.enums.EstadoPagamento;
+
 import com.yuri.mypet.repositories.ItemPedidoRepository;
 import com.yuri.mypet.repositories.PagamentoRepository;
 import com.yuri.mypet.repositories.PedidoRepository;

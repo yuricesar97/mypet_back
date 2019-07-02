@@ -13,67 +13,70 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.yuri.mypet.domain.PessoaJuridica;
+
+import com.yuri.mypet.domain.PetProvider;
 import com.yuri.mypet.domain.enums.TipoCliente;
-import com.yuri.mypet.dto.PessoaJuridicaDTO;
-import com.yuri.mypet.dto.PessoaJuridicaNewDTO;
+
+import com.yuri.mypet.dto.PetProviderDTO;
+import com.yuri.mypet.dto.PetProviderNewDTO;
 import com.yuri.mypet.repositories.EnderecoJuridicoRepository;
-import com.yuri.mypet.repositories.PessoaJuridicaRepository;
+
+import com.yuri.mypet.repositories.PetProviderRepository;
 import com.yuri.mypet.service.exceptions.DataInternalException;
 import com.yuri.mypet.service.exceptions.ObjectNotFoundException;
 
 @Service
-public class PessoaJuridicaService {
+public class PetProviderService {
 
 	@Autowired
-	PessoaJuridicaRepository repo;
+	PetProviderRepository 	petProviderRepository;
 	@Autowired
 	EnderecoJuridicoRepository enderecoRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 
-	public PessoaJuridica find(Integer id) {
+	public PetProvider find(Integer id) {
 
-		Optional<PessoaJuridica> op = repo.findById(id);
+		Optional<PetProvider> op = petProviderRepository.findById(id);
 
 		return op.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! id: " + id + ", tipo: " + PessoaJuridica.class.getName()));
+				"Objeto não encontrado! id: " + id + ", tipo: " + PetProvider.class.getName()));
 	}
 
 	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma// tra)
-	public PessoaJuridica insert(PessoaJuridica obj) {
+	public PetProvider insert(PetProvider obj) {
 		obj.setId(null);
-		obj = repo.save(obj); // salva cliente
+		obj = petProviderRepository.save(obj); // salva cliente
 	//	enderecoRepository.saveAll(obj.getEnderecos()); // salva endereço
 		return obj;
 	}
 
 
-	public PessoaJuridica update(PessoaJuridica obj) {
-		PessoaJuridica newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
+	public PetProvider update(PetProvider obj) {
+		PetProvider newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
 		updateData(newObj, obj); // atulaiza os dados como o obj que foi enviado na requisição
-		return repo.save(newObj); // save vale quanto para inserir quanto para update unica coisa que ele olha é
+		return petProviderRepository.save(newObj); // save vale quanto para inserir quanto para update unica coisa que ele olha é
 									// se o Id esta nulo ele insere se não atualiza
 	}
 
 	public void delete(Integer id) {
 		find(id);
 		try {
-			repo.deleteById(id);
+			petProviderRepository.deleteById(id);
 
 		} catch (DataIntegrityViolationException e) {
 			throw new DataInternalException("Não é possivel exclui porque há pedidos relacionadas");
 		}
 	}
 
-	public List<PessoaJuridica> findAll() {
-		return repo.findAll();
+	public List<PetProvider> findAll() {
+		return petProviderRepository.findAll();
 	}
 	
 
 
-	public Page<PessoaJuridica> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page vai
+	public Page<PetProvider> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page vai
 																											// encapsular
 																											// informações
 																											// e
@@ -95,25 +98,25 @@ public class PessoaJuridicaService {
 																												// pagina
 																												// de
 																												// dados
-		return repo.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
+		return petProviderRepository.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
 	}
 
-	public PessoaJuridica fromDto(PessoaJuridicaDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
+	public PetProvider fromDto(PetProviderDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 
 		
-		return new PessoaJuridica(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(),
-				null, null, null,objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),
-				objDto.getDescricaoPetHome(),objDto.getDescricaoPetClient(),objDto.getSituacaoAprovacao(), objDto.isFarmacia(),
+		return new PetProvider(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(),
+				null, null, null,objDto.getDescricao(),
+				objDto.getDescricaoPetHome(),objDto.getSituacaoAprovacao(), objDto.isFarmacia(),
 				objDto.isBanho(), objDto.isTosa(), objDto.isLoja(), objDto.isVacinacao(), objDto.isConsulta(), objDto.isExames(),
 				objDto.isApartamento(),objDto.isCasa(), objDto.isFumante(), objDto.isTelado(),objDto.isPetVet(),objDto.isPetClient(),
 				objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(),objDto.getNumero(),
 				objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),objDto.getCidade(),objDto.getEstado());
 	}
 
-	public PessoaJuridica fromDto(PessoaJuridicaNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
+	public PetProvider fromDto(PetProviderNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
 			
 		//PessoaJuridica cli1 = new PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, descricaoPetShop, descricaoPetVet, descricaoPetHome, descricaoPetClient, situacaoAprovacao, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop, checkStatus, logradouro, numero, complemento, bairro, cep, cidade, estado)
-		PessoaJuridica cli1 = new PessoaJuridica(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetClient(),objDto.getDescricaoPetHome(),null,objDto.getDescricaoPetShop(),objDto.getDescricaoPetVet(),objDto.isFarmacia(),
+		PetProvider cli1 = new PetProvider(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetHome(),null,objDto.getDescricao(),objDto.isFarmacia(),
 				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep()
 				              ,objDto.getCidade(),objDto.getEstado());
 	
@@ -130,7 +133,7 @@ public class PessoaJuridicaService {
 		return cli1;
 	}
 
-	private void updateData(PessoaJuridica newObj, PessoaJuridica obj) { // metado aux para atualizar os campos do cliente, pegando o
+	private void updateData(PetProvider newObj, PetProvider obj) { // metado aux para atualizar os campos do cliente, pegando o
 															// novo e colocando no antigo
 		newObj.setRazaoSocial(obj.getRazaoSocial());
 		newObj.setEmail(obj.getEmail());
@@ -142,13 +145,11 @@ public class PessoaJuridicaService {
 		newObj.setCep(obj.getCep());
 		newObj.setCheckStatus(obj.isCheckStatus());
 		newObj.setCidade(obj.getCidade());
-		newObj.setCnpj(obj.getCnpj());
+		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
 		newObj.setComplemento(obj.getComplemento());
 		newObj.setConsulta(obj.isConsulta());
-		newObj.setDescricaoPetClient(obj.getDescricaoPetClient());
 		newObj.setDescricaoPetHome(obj.getDescricaoPetHome());
-		newObj.setDescricaoPetShop(obj.getDescricaoPetShop());
-		newObj.setDescricaoPetVet(obj.getDescricaoPetVet());
+		newObj.setDescricao(obj.getDescricao());
 		newObj.setEstado(obj.getEstado());
 		newObj.setExames(obj.isExames());
 		newObj.setFarmacia(obj.isFarmacia());

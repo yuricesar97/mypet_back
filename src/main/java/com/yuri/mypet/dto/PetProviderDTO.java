@@ -7,11 +7,11 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.yuri.mypet.domain.PessoaJuridica;
+import com.yuri.mypet.domain.PetProvider;
 import com.yuri.mypet.service.validation.JuridicoUpdate;
 
 @JuridicoUpdate
-public class PessoaJuridicaDTO implements Serializable {
+public class PetProviderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -34,10 +34,8 @@ public class PessoaJuridicaDTO implements Serializable {
 	private String estado;
 
 	private String fotoPerfil;
-	private String descricaoPetShop;
-	private String descricaoPetVet;
+	private String descricao;
 	private String descricaoPetHome;
-	private String descricaoPetClient;
 	private String situacaoAprovacao;
 
 	private boolean checkStatus = false;
@@ -62,13 +60,13 @@ public class PessoaJuridicaDTO implements Serializable {
 
 	// private EnderecoFisico endereco;
 
-	public PessoaJuridicaDTO(PessoaJuridica obj) { // construtor sera respnosavel por instanciar um DTO com os dados que
+	public PetProviderDTO(PetProvider obj) { // construtor sera respnosavel por instanciar um DTO com os dados que
 		// desejo
 
 		id = obj.getId();
 		razaoSocial = obj.getRazaoSocial();
 		email = obj.getEmail();
-		cnpj = obj.getCnpj();
+		cnpj = obj.getCpfOuCnpj();
 		logradouro = obj.getLogradouro();
 		numero = obj.getNumero();
 		complemento = obj.getComplemento();
@@ -92,15 +90,13 @@ public class PessoaJuridicaDTO implements Serializable {
 		 petClient = obj.isPetClient();
 		 petHome = obj.isPetHome();
 		 petShop = obj.isPetShop();
-		 descricaoPetClient = obj.getDescricaoPetClient();
 		 descricaoPetHome = obj.getDescricaoPetHome();
-		 descricaoPetShop =  obj.getDescricaoPetShop();
-		 descricaoPetVet = obj.getDescricaoPetVet();
+		 descricao =  obj.getDescricao();
 		 situacaoAprovacao = obj.getSituacaoAprovacao();
 
 	}
 
-	public PessoaJuridicaDTO() {
+	public PetProviderDTO() {
 
 	}
 
@@ -199,20 +195,12 @@ public class PessoaJuridicaDTO implements Serializable {
 	 * }
 	 */
 
-	public String getDescricaoPetShop() {
-		return descricaoPetShop;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricaoPetShop(String descricaoPetShop) {
-		this.descricaoPetShop = descricaoPetShop;
-	}
-
-	public String getDescricaoPetVet() {
-		return descricaoPetVet;
-	}
-
-	public void setDescricaoPetVet(String descricaoPetVet) {
-		this.descricaoPetVet = descricaoPetVet;
+	public void setDescricaoPetShop(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public String getDescricaoPetHome() {
@@ -223,13 +211,6 @@ public class PessoaJuridicaDTO implements Serializable {
 		this.descricaoPetHome = descricaoPetHome;
 	}
 
-	public String getDescricaoPetClient() {
-		return descricaoPetClient;
-	}
-
-	public void setDescricaoPetClient(String descricaoPetClient) {
-		this.descricaoPetClient = descricaoPetClient;
-	}
 
 	public boolean isFarmacia() {
 		return farmacia;
