@@ -33,15 +33,13 @@ public class PetClientService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public PetClient find(Integer id) {
-
 		Optional<PetClient> op = petClientRepository.findById(id);
 
 		return op.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! id: " + id + ", tipo: " + PetClient.class.getName()));
 	}
 
-	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma
-					// tra)
+	@Transactional
 	public PetClient insert(PetClient obj) {
 		obj.setId(null);
 		obj = petClientRepository.save(obj); // salva cliente
@@ -99,9 +97,14 @@ public class PetClientService {
 
 	public PetClient fromDto(PetClientDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um
 															// DTO
+		System.out.println("fromDto objDto.getNomeCompleto(): " + objDto.getNomeCompleto());
+		System.out.println("fromDto objDto.getEmail(): " + objDto.getEmail());
+		System.out.println("fromDto objDto.getActive(): " + objDto.getActive());
 
 		return new PetClient(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(), null,
-				null, null, null, null,  objDto.getDataNascimento(), null, null, null, null, null, null, null); // nulo
+				null, null, null, null,  objDto.getDataNascimento(),
+				null, null, null, null, null, null, null,
+				objDto.getActive()); // nulo
 																														// porque
 																														// não
 																														// temos
@@ -113,12 +116,15 @@ public class PetClientService {
 
 	public PetClient fromDto(PetClientNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de
 																// um DTO
+		System.out.println("NEWDTO fromDto objDto.getNomeCompleto(): " + objDto.getNomeCompleto());
+		System.out.println("NEWDTO fromDto objDto.getEmail(): " + objDto.getEmail());
+		System.out.println("NEWDTO fromDto objDto.getActive(): " + objDto.getActive());
 
-		PetClient cli1 = new PetClient(null, objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
+		PetClient cli1 = new PetClient(objDto.getId(), objDto.getUsername(), objDto.getNomeCompleto(), objDto.getEmail(),
 				objDto.getCpf(), TipoCliente.toEnum(objDto.getTipoPerfil()),
 				bCryptPasswordEncoder.encode(objDto.getSenha()), null, objDto.getDescricao(),
 				objDto.getDataNascimento(), objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
-				objDto.getBairro(), objDto.getCep(), objDto.getCidade(), objDto.getEstado());
+				objDto.getBairro(), objDto.getCep(), objDto.getCidade(), objDto.getEstado(), objDto.getActive());
 
 		// EnderecoFisico end = new EnderecoFisico(null, objDto.getLogradouro(),
 		// objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(),
@@ -132,7 +138,7 @@ public class PetClientService {
 		if (objDto.getTelefone3() != null) {
 			cli1.getTelefones().add(objDto.getTelefone3());
 		}
-
+		System.out.println("fromDto cli1: " + cli1);
 		return cli1;
 	}
 
@@ -141,6 +147,7 @@ public class PetClientService {
 		// novo e colocando no antigo
 		newObj.setUsername(obj.getUsername());
 		newObj.setEmail(obj.getEmail());
+		newObj.setActive(obj.getActive());
 
 	}
 }

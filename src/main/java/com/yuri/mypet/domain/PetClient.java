@@ -20,8 +20,10 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yuri.mypet.domain.enums.Perfil;
 import com.yuri.mypet.domain.enums.TipoCliente;
+import org.hibernate.annotations.Where;
 
 @Entity
+@Where(clause="is_active=1")
 public class PetClient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -52,6 +54,9 @@ public class PetClient implements Serializable {
 	private String descricao;
 	private String dataNascimento;
 
+	@Column(name="is_active")
+	private Boolean active;
+
 	/**
 	 * @OneToMany(mappedBy = "pessoaFisica",cascade = CascadeType.ALL) // cascade,
 	 *                     toda modificação que ocorrer no cliente ocorre em
@@ -78,7 +83,7 @@ public class PetClient implements Serializable {
 	public PetClient(Integer id, String username, String nomeCompleto, String email, String cpf, TipoCliente tipoPerfil,
 			String senha, String fotoPerfil, String descricao, String dataNascimento,
 			String logradouro, String numero, String complemento, String bairro, String cep, String cidade,
-			String estado) {
+			String estado, Boolean active) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -100,6 +105,7 @@ public class PetClient implements Serializable {
 		this.dataNascimento = dataNascimento;
 		this.nomeCompleto = nomeCompleto;
 		addPerfil(Perfil.CLIENTE);
+		this.active = active;
 	}
 
 	public Integer getId() {
@@ -252,6 +258,14 @@ public class PetClient implements Serializable {
 
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	@Override

@@ -8,14 +8,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.yuri.mypet.domain.PetClient;
@@ -53,14 +49,13 @@ public class PessoaFisicaResource {
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody PetClientDTO objDto, @PathVariable Integer id) {// receber
-																												// o
-																												// obejto
-																												// json
-																												// e
-		// tambem o parametro da
-		PetClient obj = service.fromDto(objDto); // URL
+		System.out.println("ENTROU NO PUT objDto.getActive(): " + objDto.getActive());
+		System.out.println("ENTROU NO PUT objDto.getNomeCompleto(): " + objDto.getNomeCompleto());
+		System.out.println("ENTROU NO PUT id: " + id);
+		PetClient obj = service.fromDto(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
+		//System.out.println("ENTROU NO PUT obj.getActive(): " + obj.getActive());
 		return ResponseEntity.noContent().build();
 	}
 
@@ -80,20 +75,7 @@ public class PessoaFisicaResource {
 
 		List<PetClient> list = service.findAll();
 		List<PetClientDTO> listDto = list.stream().map(obj -> new PetClientDTO(obj)).collect(Collectors.toList()); // stream
-																															// percorre
-																															// a
-																															// lista,
-																															// map
-																															// realiza
-																															// uma
-																															// operação
-																															// para
-																															// cada
-																															// elemento
-																															// da
-																															// lista
 		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
-		// collector realiza a transformação para lista novamente
 	}
 
 	@CrossOrigin
@@ -112,5 +94,7 @@ public class PessoaFisicaResource {
 		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
 		// collector realiza a transformação para lista novamente
 	}
+
+
 
 }

@@ -2,6 +2,7 @@ package com.yuri.mypet.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -14,7 +15,11 @@ public class PetClientNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+
+	private Integer id;
+
 	private String username;
+
 
 	@NotEmpty(message = "Preechimento obrigatório")
 	@Email(message = "Email inválido")
@@ -57,8 +62,19 @@ public class PetClientNewDTO implements Serializable {
 	private String telefone2;
 	private String telefone3;
 
+	@Column(name="is_active")
+	private Boolean active;
+
 	public PetClientNewDTO() {
 
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCpf() {
@@ -219,4 +235,11 @@ public class PetClientNewDTO implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

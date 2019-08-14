@@ -2,6 +2,7 @@ package com.yuri.mypet.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -19,12 +20,14 @@ public class PetClientDTO implements Serializable {
 
 	private String username;
 	private String senha;
-	@NotEmpty(message = "Prenchimento obrigatório")
-	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
+
+
+	/*@NotEmpty(message = "Prenchimento obrigatório")
+	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")*/
 	private String nomeCompleto;
 
-	@NotEmpty(message = "Preechimento obrigatório")
-	@Email(message = "Email inválido")
+	/*@NotEmpty(message = "Preechimento obrigatório")
+	@Email(message = "Email inválido")*/
 	private String email;
 	private String cpf;
 	private String dataNascimento;
@@ -41,6 +44,9 @@ public class PetClientDTO implements Serializable {
 	private String fotoPerfil;
 	private boolean petWalker = false;
 	private String descricao;
+
+	@Column(name="is_active")
+	private Boolean active = true;
 
 	public PetClientDTO() {
 
@@ -66,6 +72,8 @@ public class PetClientDTO implements Serializable {
 		fotoPerfil = obj.getFotoPerfil();
 		descricao = obj.getDescricao();
 		dataNascimento = obj.getDataNascimento();
+		active = obj.getActive();
+
 	}
 
 	public String getCpf() {
@@ -212,4 +220,11 @@ public class PetClientDTO implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

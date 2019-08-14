@@ -125,33 +125,33 @@ public class DBService {
 
 				PetClient cli1 = new PetClient(null, "maria_silva", "Maria Silva", "yuricesar97@gmail.com", "36378912377",
 				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, "21/04/1997",
-				"Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Santos", null);
+				"Rua Flores", "300", "Apto 303", "Pompeia", "38220834", "Santos", null, true);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli2 = new PetClient(null, "antonio_nunes", "Antonio Nunes", "antonio@gmail.com", "36378912377",
 				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, "21/04/1997",
-				"Rua Flores", "300", "Apto 303", "Chácaras São Paulo", "38220834", "Franca", null);
+				"Rua Flores", "300", "Apto 303", "Chácaras São Paulo", "38220834", "Franca", null, true);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 			cli2.addPerfil(Perfil.ADMIN);
 			
 		PetClient cli3 = new PetClient(null, "juliana_aparecida", "Juliana Aparecida", "juliana@gmail.com",
 				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, 
-				"21/04/1997", "Rua Flores", "300", "Apto 303", "Colônia", "38220834", "Jundiaí", null);
+				"21/04/1997", "Rua Flores", "300", "Apto 303", "Colônia", "38220834", "Jundiaí", null, true);
 		cli3.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli4 = new PetClient(null, "fabiola_marcondes", "Fabiola Marcondes", "fabiola@gmail.com",
 				"36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null, 
-				"21/04/1997", "Rua Flores", "300", "Apto 303", "Centro", "38220834", "Campinas", null);
+				"21/04/1997", "Rua Flores", "300", "Apto 303", "Centro", "38220834", "Campinas", null, true);
 		cli4.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli5 = new PetClient(null, "marina_david", "Marina David", "marina@gmail.com", "36378912377",
 				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("123"), null, null,  "21/04/1997",
-				"Rua Flores", "300", "Apto 303", "Bela vista", "38220834", "Bauru", null);
+				"Rua Flores", "300", "Apto 303", "Bela vista", "38220834", "Bauru", null, true);
 		cli5.getTelefones().addAll(Arrays.asList("27363323", "938393"));
 
 		PetClient cli6 = new PetClient(null, "ana_costa", "Ana Costa", "ana@gmail.com", "36378912377",
 				TipoCliente.PESSOAFISICA, bCryptPasswordEncoderEncoder.encode("321"), null, null, null,
-				"Avenida Matos", "105", "Sala 800", "Alegre", "38777012", "Holambra", null);
+				"Avenida Matos", "105", "Sala 800", "Alegre", "38777012", "Holambra", null, true);
 		cli6.addPerfil(Perfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("23363323", "938388893"));
 
