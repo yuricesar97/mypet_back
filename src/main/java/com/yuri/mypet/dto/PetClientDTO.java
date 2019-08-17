@@ -56,6 +56,7 @@ public class PetClientDTO implements Serializable {
 												// desejo
 
 		id = obj.getId();
+		active = obj.getActive();
 		username = obj.getUsername();
 		nomeCompleto = obj.getNomeCompleto();
 		email = obj.getEmail();
@@ -72,7 +73,6 @@ public class PetClientDTO implements Serializable {
 		fotoPerfil = obj.getFotoPerfil();
 		descricao = obj.getDescricao();
 		dataNascimento = obj.getDataNascimento();
-		active = obj.getActive();
 
 	}
 

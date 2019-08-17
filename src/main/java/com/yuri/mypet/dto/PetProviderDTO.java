@@ -2,6 +2,7 @@ package com.yuri.mypet.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -60,10 +61,14 @@ public class PetProviderDTO implements Serializable {
 
 	// private EnderecoFisico endereco;
 
+	@Column(name="is_active")
+	private Boolean active;
+
 	public PetProviderDTO(PetProvider obj) { // construtor sera respnosavel por instanciar um DTO com os dados que
 		// desejo
 
 		id = obj.getId();
+		active = obj.getActive();
 		razaoSocial = obj.getRazaoSocial();
 		email = obj.getEmail();
 		cnpj = obj.getCpfOuCnpj();
@@ -355,6 +360,12 @@ public class PetProviderDTO implements Serializable {
 	public void setPetShop(boolean petShop) {
 		this.petShop = petShop;
 	}
-	
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

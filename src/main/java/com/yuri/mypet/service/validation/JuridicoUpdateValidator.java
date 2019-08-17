@@ -42,6 +42,8 @@ public class JuridicoUpdateValidator implements ConstraintValidator<JuridicoUpda
 		if(aux != null && !aux.getId().equals(uriId)) { // verificando se email já existe
 			list.add(new FieldMessage("Email", "Email já existente"));
 		}
+
+
 		
 
 		for (FieldMessage e : list) {

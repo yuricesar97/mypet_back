@@ -69,6 +69,9 @@ public class PetProvider implements Serializable {
 	private boolean fumante = false;
 	private boolean telado = false;
 
+	@Column(name="is_active")
+	private Boolean active;
+
 	/**
 	 * @OneToMany(mappedBy = "pessoaJuridica",cascade = CascadeType.ALL) // cascade,
 	 *                     toda modificação que ocorrer no cliente ocorre em
@@ -95,9 +98,10 @@ public class PetProvider implements Serializable {
 			String situacaoAprovacao, boolean farmacia, boolean banho, boolean tosa, boolean loja, boolean vacinacao,
 			boolean consulta, boolean exames, boolean apartamento, boolean casa, boolean fumante, boolean telado,
 			boolean petVet, boolean petClient, boolean petHome, boolean petShop,boolean checkStatus, String logradouro, String numero,
-			String complemento, String bairro, String cep, String cidade, String estado) {
+			String complemento, String bairro, String cep, String cidade, String estado, Boolean active) {
 		super();
 		this.id = id;
+		this.active = active;
 		this.razaoSocial = razaoSocial;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
@@ -400,6 +404,13 @@ public class PetProvider implements Serializable {
 		this.descricaoPetHome = descricaoPetHome;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
 	@Override
 	public int hashCode() {

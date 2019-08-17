@@ -43,10 +43,8 @@ public class PetProviderResource {
 	
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PetProviderNewDTO objDto) { // requestBody faz o json ser
-																							// convertido para obj//
-																							// java automaticamente
-		PetProvider obj = petProviderService.fromDto(objDto);// coverto Dto para objeto entidade
+	public ResponseEntity<Void> insert(@Valid @RequestBody PetProviderNewDTO objDto) {
+		PetProvider obj = petProviderService.fromDto(objDto);
 		obj = petProviderService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -54,19 +52,14 @@ public class PetProviderResource {
 
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PetProviderDTO objDto, @PathVariable Integer id) {// receber
-																												// o
-																												// obejto
-																												// json
-																												// e
-		// tambem o parametro da
-		PetProvider obj = petProviderService.fromDto(objDto); // URL
+	public ResponseEntity<Void> update(@Valid @RequestBody PetProviderDTO objDto, @PathVariable Integer id) {
+		PetProvider obj = petProviderService.fromDto(objDto);
 		obj.setId(id);
 		obj = petProviderService.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // para bater em um end pont com id
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -83,10 +76,8 @@ public class PetProviderResource {
 
 		List<PetProvider> list = petProviderService.findAll();
 		List<PetProviderDTO> listDto = list.stream().map(obj -> new PetProviderDTO(obj))
-				.collect(Collectors.toList()); // stream percorre a lista, map realiza uma operação para cada elemento
-												// da lista
-		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
-		// collector realiza a transformação para lista novamente
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 
 	// @PreAuthorize("hasAnyRole('ADMIN')")
@@ -99,11 +90,8 @@ public class PetProviderResource {
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
 		Page<PetProvider> list = petProviderService.findPage(page, linesPerPage, orderBy, direction);
-		Page<PetProviderDTO> listDto = list.map(obj -> new PetProviderDTO(obj)); // stream percorre a lista, map
-																						// realiza uma operação para
-																						// cada elemento da lista
-		return ResponseEntity.ok().body(listDto); // obj função anonima que recebece uma obj com argumento
-		// collector realiza a transformação para lista novamente
+		Page<PetProviderDTO> listDto = list.map(obj -> new PetProviderDTO(obj));
+		return ResponseEntity.ok().body(listDto);
 	}
 
 }

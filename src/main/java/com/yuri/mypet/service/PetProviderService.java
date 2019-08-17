@@ -44,20 +44,18 @@ public class PetProviderService {
 				"Objeto não encontrado! id: " + id + ", tipo: " + PetProvider.class.getName()));
 	}
 
-	@Transactional // para que tudo ocorra de forma trasicional (salava endereço e cliente em uma// tra)
+	@Transactional
 	public PetProvider insert(PetProvider obj) {
 		obj.setId(null);
-		obj = petProviderRepository.save(obj); // salva cliente
-	//	enderecoRepository.saveAll(obj.getEnderecos()); // salva endereço
+		obj = petProviderRepository.save(obj);
 		return obj;
 	}
 
 
 	public PetProvider update(PetProvider obj) {
-		PetProvider newObj = find(obj.getId()); // instanciar um cliente a parir do banco dados
-		updateData(newObj, obj); // atulaiza os dados como o obj que foi enviado na requisição
-		return petProviderRepository.save(newObj); // save vale quanto para inserir quanto para update unica coisa que ele olha é
-									// se o Id esta nulo ele insere se não atualiza
+		PetProvider newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return petProviderRepository.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -76,32 +74,13 @@ public class PetProviderService {
 	
 
 
-	public Page<PetProvider> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {// Page vai
-																											// encapsular
-																											// informações
-																											// e
-																											// operações
-																											// sobre a
-																											// paginação
+	public Page<PetProvider> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy); // prepara
-																												// as
-																												// informações
-																												// para
-																												// que
-																												// faça
-																												// a
-																												// consulta
-																												// que
-																												// retorne
-																												// a
-																												// pagina
-																												// de
-																												// dados
-		return petProviderRepository.findAll(pageRequest); // Direction convertendo do tipo String para o tipo Direction
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return petProviderRepository.findAll(pageRequest);
 	}
 
-	public PetProvider fromDto(PetProviderDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
+	public PetProvider fromDto(PetProviderDTO objDto) {
 
 		
 		return new PetProvider(objDto.getId(), objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCnpj(),
@@ -110,18 +89,16 @@ public class PetProviderService {
 				objDto.isBanho(), objDto.isTosa(), objDto.isLoja(), objDto.isVacinacao(), objDto.isConsulta(), objDto.isExames(),
 				objDto.isApartamento(),objDto.isCasa(), objDto.isFumante(), objDto.isTelado(),objDto.isPetVet(),objDto.isPetClient(),
 				objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(),objDto.getNumero(),
-				objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),objDto.getCidade(),objDto.getEstado());
+				objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),objDto.getCidade(),
+				objDto.getEstado(), objDto.getActive());
 	}
 
-	public PetProvider fromDto(PetProviderNewDTO objDto) { // metado auxiliar que instacia uma categoria a partir de um DTO
-			
-		//PessoaJuridica cli1 = new PessoaJuridica(id, razaoSocial, email, cnpj, tipoPerfil, senha, fotoPerfil, descricaoPetShop, descricaoPetVet, descricaoPetHome, descricaoPetClient, situacaoAprovacao, farmacia, banho, tosa, loja, vacinacao, consulta, exames, apartamento, casa, fumante, telado, petVet, petClient, petHome, petShop, checkStatus, logradouro, numero, complemento, bairro, cep, cidade, estado)
+	public PetProvider fromDto(PetProviderNewDTO objDto) {
+
 		PetProvider cli1 = new PetProvider(null, objDto.getRazaoSocial(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipoPerfil()),bCryptPasswordEncoder.encode(objDto.getSenha()),null,objDto.getDescricaoPetHome(),null,objDto.getDescricao(),objDto.isFarmacia(),
 				              objDto.isBanho(),objDto.isTosa(),objDto.isLoja(),objDto.isVacinacao(),objDto.isConsulta(),objDto.isExames(),objDto.isApartamento(),objDto.isCasa(),objDto.isFumante(),objDto.isTelado(), objDto.isPetVet(),objDto.isPetClient(),objDto.isPetHome(),objDto.isPetShop(),objDto.isCheckStatus(),objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep()
-				              ,objDto.getCidade(),objDto.getEstado());
-	
-	//	EnderecoJuridico end = new EnderecoJuridico(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(),objDto.getCidade(),objDto.getEstado(), cli1);//endereços conhece os clientes
-	//	cli1.getEnderecos().add(end); // cliente conhece seus endereços
+				              ,objDto.getCidade(),objDto.getEstado(), objDto.getActive());
+
 		cli1.getTelefones().add(objDto.getTelefone1());
 		if(objDto.getTelefone2() != null) {
 			cli1.getTelefones().add(objDto.getTelefone2());
@@ -169,6 +146,7 @@ public class PetProviderService {
 		//newObj.setTipoPerfil(obj.getTipoPerfil());
 		newObj.setTosa(obj.isTosa());
 		newObj.setVacinacao(obj.isVacinacao());
+		newObj.setActive(obj.getActive());
 		
 	}
 }

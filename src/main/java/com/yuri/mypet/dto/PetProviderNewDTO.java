@@ -2,6 +2,7 @@ package com.yuri.mypet.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -81,6 +82,9 @@ public class PetProviderNewDTO implements Serializable {
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
+
+	@Column(name="is_active")
+	private Boolean active;
 	
 	
 	
@@ -377,10 +381,12 @@ public class PetProviderNewDTO implements Serializable {
 	public void setSituacaoAprovacao(String situacaoAprovacao) {
 		this.situacaoAprovacao = situacaoAprovacao;
 	}
-	
-	
-	
-	
-	
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

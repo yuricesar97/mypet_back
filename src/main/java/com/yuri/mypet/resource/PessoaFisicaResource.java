@@ -49,9 +49,6 @@ public class PessoaFisicaResource {
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody PetClientDTO objDto, @PathVariable Integer id) {// receber
-		System.out.println("ENTROU NO PUT objDto.getActive(): " + objDto.getActive());
-		System.out.println("ENTROU NO PUT objDto.getNomeCompleto(): " + objDto.getNomeCompleto());
-		System.out.println("ENTROU NO PUT id: " + id);
 		PetClient obj = service.fromDto(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
